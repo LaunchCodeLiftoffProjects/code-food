@@ -34,8 +34,5 @@ Java, Spring boot, MVC, Bootstrap, Intellij, My SQL
 ### Project Tracker
 https://trello.com/b/hp3W4kC6/liftoff
 
-### Wireframes
-https://www.tldraw.com/r/1640134478319
-
 ### Wireframes- New
 https://www.tldraw.com/r/1640747713280
