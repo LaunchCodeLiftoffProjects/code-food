@@ -13,11 +13,6 @@
         <span th:errors="${cuisine.name}" class="error"></span>
     </div>
 
-    <div class="form-group">
-        <label th:for="description">Cuisine Description</label>
-        <input class="form-control" th:field="${cuisine.description}" />
-        <span th:errors="${cuisine.description}" class="error"></span>
-    </div>
 
     <input type="submit" value="Add Cuisine" />
 </form>
