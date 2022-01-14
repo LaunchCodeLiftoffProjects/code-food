@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container  body-content">
+<h1>Delete Cuisine</h1>
+
+<nav th:replace="fragments :: page-header"></nav>
+<form method="post">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cuisine</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tr th:each="cuisine:${cuisines}">
+            <div class="form-group">
+                <td th:text="${cuisine.id}"></td>
+                <td th:text="${cuisine.name}"></td>
+                <td>
+                    <input type="checkbox" name="cuisineIds" th:value="${cuisine.id}" class="form-control">
+                </td>
+            </div>
+        </tr>
+    </table>
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+</body>
+</html>
