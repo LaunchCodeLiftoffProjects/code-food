@@ -26,7 +26,7 @@
                     Dietary Restrictions:
                     <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
                         <li>
-                            <a th:href="@{'/dietaryRestriction/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a>
+                            <a th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a>
                         </li>
                     </ul>
                 </p>
