@@ -25,13 +25,13 @@
             </li>
         </td>
         <td>
-            <li th:each="dietaryRestrictions : ${dietRestrictions}">
-                <a th:href="@{/list/jobs(column=dietaryRestriction,value=${dietaryRestrictions.name})}" th:text="${dietaryRestriction.name}"></a>
+            <li th:each="dietaryRestrictions : ${dietaryRestrictions}">
+                <a th:href="@{/list/recipes(column=dietaryRestriction,value=${dietaryRestrictions.name})}" th:text="${dietaryRestriction.name}"></a>
             </li>
         </td>
         <td>
             <li th:each="mealType : ${mealTypes}">
-                <a th:href="@{/list/jobs(column=mealType,value=${mealType.name})}" th:text="${mealType.name}"></a>
+                <a th:href="@{/list/recipes(column=mealType,value=${mealType.name})}" th:text="${mealType.name}"></a>
             </li>
         </td>
     </tr>
