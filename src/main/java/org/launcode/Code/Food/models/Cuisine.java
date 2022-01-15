@@ -1,19 +1,28 @@
 package org.launcode.Code.Food.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Cuisine extends AbstractEntity{
 
+    @Id
+    @GeneratedValue
+    private int id;
 
 
-    public Cuisine() {
+    @OneToMany()
+    @JoinColumn(name = "cuisine_id")
+    private final List<Recipe> recipes = new ArrayList<>();
+
+    public Cuisine() {}
+
+    public List<Recipe> getRecipes() {
+        return recipes;
     }
-
-
 
     @Override
     public String toString() {

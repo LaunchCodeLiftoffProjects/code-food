@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container  body-content">
+<h1>Add Dietary Restriction</h1>
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label th:for="name">Dietary Restriction Name</label>
+        <input class="form-control" th:field="${dietaryRestriction.name}" />
+        <span th:errors="${dietaryRestriction.name}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="description">Dietary Restriction</label>
+        <input class="form-control" th:field="${dietaryRestriction.description}" />
+        <span th:errors="${dietaryRestriction.description}" class="error"></span>
+    </div>
+
+    <input type="submit" value="Add Dietary Restriction" />
+</form>
+
+</body>
+</html>
