@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<h1>Add Recipe</h1>
+
+<form method="post" style="max-width:600px;">
+  <div class="form-group">
+    <label th:for="name">Recipe Name</label>
+    <input class="form-control" th:field="${recipe.name}" />
+    <span th:errors="${recipe.name}" class="error"></span>
+
+  </div>
+
+  <div class="form-group">
+    <label th:for="name">Ingredients</label>
+    <textarea class="form-control" th:field="${recipe.ingredients}" />
+    <span th:errors="${recipe.ingredients}" class="error"></span>
+
+  </div>
+
+  <div class="form-group">
+    <label th:for="name">Instructions</label>
+    <textarea class="form-control" th:field="${recipe.instructions}" />
+    <span th:errors="${recipe.instructions}" class="error"></span>
+
+  </div>
+
+
+
+
+
+  <input type="submit" value="Create Recipes" />
+
+
+
+
+
+
+</body>
+</html>

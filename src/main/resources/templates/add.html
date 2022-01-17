@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<h1>Add Recipe</h1>
+
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label>Name
+            <input class="form-control" th:field="${job.name}">
+        </label>
+        <p class="error" th:errors="${job.name}"></p>
+    </div>
+
+
+    <div class="form-group">
+        <label>Employer
+            <select name="employerId">
+                <option th:each="employer : ${employers}"
+                        th:value="${employer.id}"
+                        th:text="${employer.name}">
+                </option>
+            </select>
+            <a th:href="@{'/employers/add'}">Add Employers</a>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>Skills
+            <input type="checkbox" name="skills"
+                   th:each="skill : ${skills}"
+                   th:text="${skill.name}"
+                   th:value="${skill.id}"
+            />
+            </th:block>
+            <a th:href="@{'/skills/add'}">Add Skills</a>
+        </label>
+    </div>
+
+    <input type="submit" value="Add Job" class="btn btn-success">
+</form>
+
+</body>
+</html>

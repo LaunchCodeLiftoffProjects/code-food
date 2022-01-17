@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<p th:unless="${recipes} and ${recipes.size()}">no jobs!</p>
+
+<div class="container body-content">
+    <h2>Recipes</h2>
+    <ul>
+        <li th:each="recipe : ${recipes}">
+            <a th:href="@{'/recipe/view/' + ${recipe.id}}" th:text="${recipe.name}"></a>
+        </li>
+    </ul>
+
+    <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link" th:href="@{'/recipe/add'}">Add Recipe</a></li>
+        <li><a th:href="@{'/recipe/delete'}">Delete Recipe</a></li>
+    </ul>
+
+</div>
+
+</body>
+</html>
