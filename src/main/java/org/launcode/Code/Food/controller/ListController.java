@@ -43,7 +43,6 @@ public class ListController {
 
     @RequestMapping("")
     public String list(Model model) {
-        //left old code so we can see where things connect
         model.addAttribute("cuisine", cuisineRepository.findAll());
         model.addAttribute("dietaryRestriction", dietaryRestrictionRepository.findAll());
         //        model.addAttribute("mealType", mealRepository.findAll());
@@ -54,16 +53,13 @@ public class ListController {
     public String listRecipesByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         Iterable<Recipe> recipes;
         if (column.toLowerCase().equals("all")){
-            //recipes = recipeRepository.findAll();
             recipes = recipeRepository.findAll();
             model.addAttribute("title", "All Recipes");
         } else {
-            //recipes = RecipeData.findByColumnAndValue(column, value, recipeRepository.findAll());
             recipes = RecipeData.findByColumnAndValue(column, value, recipeRepository.findAll());
-
             model.addAttribute("title", "Recipes with " + columnChoices.get(column) + ": " + value);
         }
-        //model.addAttribute("recipes", recipes);
+
         model.addAttribute("recipes", recipes);
 
         return "list-recipes";
