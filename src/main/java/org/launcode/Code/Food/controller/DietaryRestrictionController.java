@@ -21,7 +21,7 @@ public class DietaryRestrictionController {
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("title","Dietary Restrictions");
-        model.addAttribute("dietaryrestrictions", dietaryRestrictionRepository.findAll());
+        model.addAttribute("dietaryRestrictions", dietaryRestrictionRepository.findAll());
         return "dietaryrestrictions/index";
     }
 
@@ -59,14 +59,14 @@ public class DietaryRestrictionController {
     @GetMapping("delete")
     public String displayDeleteDietaryRestrictionForm(Model model){
         model.addAttribute("title","Delete Dietary Restriction");
-        model.addAttribute("dietaryRestrictions",dietaryRestrictionRepository.findAll());
+        model.addAttribute("dietaryRestrictions", dietaryRestrictionRepository.findAll());
         return "dietaryrestrictions/delete";
     }
 
     @PostMapping("delete")
-    public String deleteDietaryRestrictionListings(@RequestParam(required = false) int[] dietaryRestrictionId){
-        if(dietaryRestrictionId!=null) {
-            for (int id : dietaryRestrictionId) {
+    public String deleteDietaryRestrictionListings(@RequestParam(required = false) int[] dietaryRestrictionIds){
+        if(dietaryRestrictionIds!=null) {
+            for (int id : dietaryRestrictionIds) {
                 dietaryRestrictionRepository.deleteById(id);
             }
         }
