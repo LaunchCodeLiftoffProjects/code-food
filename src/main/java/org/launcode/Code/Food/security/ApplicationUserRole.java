@@ -11,7 +11,7 @@ import static org.launcode.Code.Food.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
     USER(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet(COURSE_READ. COURSE_WRITE, USER_READ, USER_WRITE)),
+    ADMIN(Sets.newHashSet(COURSE_READ, COURSE_WRITE, USER_READ, USER_WRITE)),
     ADMINTRAINEE(Sets.newHashSet(COURSE_READ, USER_READ));
 
 
