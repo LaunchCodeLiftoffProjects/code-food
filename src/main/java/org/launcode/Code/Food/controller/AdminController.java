@@ -16,7 +16,7 @@ public class AdminController {
             new User(2, "Maria Jones"),
             new User(3, "Anna Smith")
     );
-    //Manually create a list of things, in this case, user profiles
+    //Manually create a list of user profiles
 
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')") //Replaces the antMatcher for GET

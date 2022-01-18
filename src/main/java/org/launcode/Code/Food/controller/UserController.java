@@ -18,7 +18,7 @@ public class UserController {
             new User(2, "Maria Jones"),
             new User(3, "Anna Smith")
     );
-    //Manually create a list of things, in this case, user profiles
+    //Manually create a list of user profiles
 
     @GetMapping(path="/{userId}")
     public User getUser(@PathVariable("userId") Integer userId) {
@@ -27,5 +27,5 @@ public class UserController {
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("User" + userId + " does not exist"));
     }
-    //Look for a user in the above list via path -> /user/{userId}
+    //Look for a user in the above list via path -> /{userId}
 }

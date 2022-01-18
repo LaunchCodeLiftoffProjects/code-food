@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.launcode.Code.Food.security.ApplicationUserPermission.*;
 import static org.launcode.Code.Food.security.ApplicationUserRole.*;
 
@@ -38,16 +40,29 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
-                .antMatchers("/api/**").hasRole(USER.name())
+                .antMatchers("/", "index", "/css/*", "/js/*").permitAll() //Allows for pages containing these to be accessed without logging in
+                .antMatchers("/api/**").hasRole(USER.name()) //Allows regular users to access their account
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
-                //.defaultSuccessUrl("/cuisine", true) //Adds page to redirect to after successful login
+                    .loginPage("/login")
+                    .permitAll()
+                    .defaultSuccessUrl("/", true) //Adds page to redirect to after successful login
+                    .passwordParameter("password") //Allows us to change parameter for password
+                    .usernameParameter("username") //Allows us to change parameter for username
                 .and()
-                .rememberMe();
+                .rememberMe()
+                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) //Increases remember-me session past 2 weeks
+                    .key("somethingverysecret") //Supposed to keep secret
+                    .rememberMeParameter("remember-me") //Allows us to change parameter for remember me checkbox
+                .and()
+                .logout()
+                    .logoutUrl("/logout")
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID", "remember-me")
+                    .logoutSuccessUrl("/login"); //Adds logout of the user and deletes any data leftover
     }
 
     @Override
@@ -59,6 +74,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles(USER.name()) //ROLE_USER
                 .authorities(USER.getGrantedAuthorities())
                 .build();
+        //Manually adds Anna Smith as a USER
 
         UserDetails lindaUser = User.builder()
                 .username("linda")
@@ -66,6 +82,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles(ADMIN.name()) //ROLE_ADMIN
                 .authorities(ADMIN.getGrantedAuthorities())
                 .build();
+        //Manually adds Linda as an ADMIN
 
         UserDetails tomUser = User.builder()
                 .username("tom")
@@ -73,6 +90,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles(ADMINTRAINEE.name()) //ROLE_ADMINTRAINEE
                 .authorities(ADMINTRAINEE.getGrantedAuthorities())
                 .build();
+        //Manually adds Tom as an ADMIN TRAINEE
 
         return new InMemoryUserDetailsManager(
                 annaSmithUser,
