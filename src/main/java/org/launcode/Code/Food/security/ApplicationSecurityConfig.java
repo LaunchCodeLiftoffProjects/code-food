@@ -44,7 +44,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll();
+                .loginPage("/login").permitAll()
+                //.defaultSuccessUrl("/cuisine", true) //Adds page to redirect to after successful login
+                .and()
+                .rememberMe();
     }
 
     @Override
