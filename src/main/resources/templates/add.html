@@ -10,13 +10,16 @@
 <form method="post" style="max-width:600px;">
     <div class="form-group">
         <label>Name
+
             <input class="form-control" th:field="${recipe.name}">
         </label>
         <p class="error" th:errors="${recipe.name}"></p>
+
     </div>
 
 
     <div class="form-group">
+
         <label>Cuisine
             <select name="cuisineId">
                 <option th:each="cuisine : ${cuisines}"
@@ -25,10 +28,12 @@
                 </option>
             </select>
            <a th:href="@{'/cuisines/add'}">Add Cuisines</a>
+
         </label>
     </div>
 
     <div class="form-group">
+
         <label>Dietary Restrictions
             <input type="checkbox" name="dietaryRestrictions"
                    th:each="dietaryRestriction : ${dietaryRestrictions}"

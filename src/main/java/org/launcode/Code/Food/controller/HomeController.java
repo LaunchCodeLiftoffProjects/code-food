@@ -12,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import java.util.Optional;
+
 
 @Controller
 public class HomeController {
@@ -36,6 +39,7 @@ public class HomeController {
         model.addAttribute("recipes", recipeRepository.findAll());
         return "index";
     }
+
 
     @GetMapping("add")
     public String displayAddRecipeForm(Model model) {
@@ -100,3 +104,4 @@ public class HomeController {
     }
 
 }
+
