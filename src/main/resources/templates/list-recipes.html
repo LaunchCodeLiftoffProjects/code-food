@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
+    <table class="recipe-listing">
+        <tr th:each="recipe : ${recipes}">
+            <td>
+                <p>
+                    Recipe Id:
+                    <a th:href="@{'/view/' + ${recipe.id}}" th:text="${recipe.id}"></a>
+                </p>
+                <p th:text="${'Name: ' + recipe.name}"></p>
+                <p>
+                    Cuisine:
+                    <a th:href="@{'/cuisines/view/' + ${recipe.cuisine.id}}" th:text="${recipe.cuisine.name}"></a>
+                </p>
+                <p>
+                    Dietary Restrictions:
+                    <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
+                        <li>
+                            <a th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a>
+                        </li>
+                    </ul>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

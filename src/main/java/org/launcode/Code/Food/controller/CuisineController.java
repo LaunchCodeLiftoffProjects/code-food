@@ -21,19 +21,19 @@ public class CuisineController {
     @GetMapping("")
     public String index(Model model){
         model.addAttribute("cuisines",cuisineRepository.findAll());
-        return "Cuisine/index";
+        return "cuisine/index";
     }
     @GetMapping("add")
     public String displayAddCuisineForm(Model model) {
         model.addAttribute(new Cuisine());
-        return "Cuisine/add";
+        return "cuisine/add";
     }
     @PostMapping("add")
     public String processAddCuisineForm(@ModelAttribute @Valid Cuisine newCuisine,
                                         Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            return "Cuisine/add";
+            return "cuisine/add";
         }
         cuisineRepository.save(newCuisine);
         return "redirect:";
@@ -51,6 +51,7 @@ public class CuisineController {
             return "redirect:../";
         }
     }
+
     @GetMapping("delete")
     public String displayDeleteCuisineForm(Model model){
         model.addAttribute("title","Delete Cuisine");
@@ -67,7 +68,6 @@ public class CuisineController {
         }
         return "redirect:";
     }
-
 
 }
 
