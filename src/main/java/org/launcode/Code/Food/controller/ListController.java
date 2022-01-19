@@ -38,14 +38,14 @@ public class ListController {
         columnChoices.put("all", "All");
         columnChoices.put("cuisine", "Cuisine");
         columnChoices.put("dietaryRestriction", "Dietary Restriction");
-//        columnChoices.put("mealType", "Meal Type");
+        //columnChoices.put("mealType", "Meal Type");
     }
 
     @RequestMapping("")
     public String list(Model model) {
         model.addAttribute("cuisine", cuisineRepository.findAll());
         model.addAttribute("dietaryRestriction", dietaryRestrictionRepository.findAll());
-        //        model.addAttribute("mealType", mealRepository.findAll());
+        //model.addAttribute("mealType", mealRepository.findAll());
         return "list";
     }
 
