@@ -42,16 +42,16 @@ public String instructions;
                 '}';
     }
     @ManyToOne
-    @NotNull
+    //@NotNull
     private Cuisine cuisine;
 
     @ManyToMany
-    private List<DietaryRestriction> dietaryRestrictions = new ArrayList<>();
+   private List<DietaryRestriction> dietaryRestrictions = new ArrayList<>();
 
-    public Recipe(Cuisine cuisine, List<DietaryRestriction> dietaryRestrictions) {
-        this.cuisine = cuisine;
-        this.dietaryRestrictions = dietaryRestrictions;
-    }
+   // public Recipe(Cuisine cuisine, List<DietaryRestriction> dietaryRestrictions) {
+     //   this.cuisine = cuisine;
+    //    this.dietaryRestrictions = dietaryRestrictions;
+   // }
 
     public Recipe() {}
 
