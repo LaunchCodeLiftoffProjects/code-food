@@ -1,5 +1,9 @@
 package org.launcode.Code.Food.controller;
+import org.launcode.Code.Food.models.Cuisine;
+import org.launcode.Code.Food.models.DietaryRestriction;
 import org.launcode.Code.Food.models.Recipe;
+import org.launcode.Code.Food.models.data.CuisineRepository;
+import org.launcode.Code.Food.models.data.DietaryRestrictionRepository;
 import org.launcode.Code.Food.models.data.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -15,6 +20,12 @@ public class RecipeController {
 
     @Autowired
     private RecipeRepository recipeRepository;
+
+    @Autowired
+    private CuisineRepository cuisineRepository;
+
+    @Autowired
+    private DietaryRestrictionRepository dietaryRestrictionRepository;
 
     @GetMapping("")
     public String index(Model model){
@@ -25,15 +36,25 @@ public class RecipeController {
     @GetMapping("add")
     public String displayAddRecipeForm(Model model) {
         model.addAttribute(new Recipe());
+        model.addAttribute("cuisines",cuisineRepository.findAll());
+        model.addAttribute("dietaryRestrictions",dietaryRestrictionRepository.findAll());
         return "recipe/add";
     }
     @PostMapping("add")
     public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-                                        Errors errors, Model model) {
+                                        Errors errors, Model model,@RequestParam int cuisineId,@RequestParam List<Integer> dietaryRestrictions) {
 
         if (errors.hasErrors()) {
             return "recipe/add";
         }
+        Optional<Cuisine> optCuisine = cuisineRepository.findById(cuisineId);
+        if(optCuisine.isPresent()) {
+            newRecipe.setCuisine(optCuisine.get());
+        }
+        List<DietaryRestriction> dietaryRestrictionsObjs = (List<DietaryRestriction>)dietaryRestrictionRepository.findAllById(dietaryRestrictions);
+        newRecipe.setDietaryRestrictions(dietaryRestrictionsObjs);
+        recipeRepository.save(newRecipe);
+
         recipeRepository.save(newRecipe);
         return "redirect:";
     }
