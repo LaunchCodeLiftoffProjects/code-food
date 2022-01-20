@@ -14,7 +14,7 @@ public class Recipe extends AbstractEntity{
 
 
   @NotBlank
-  @Lob
+  @Lob // specifies that database should store the property as Large object (long text) instead of varchar
 public String ingredients;
 
 @NotBlank
