@@ -9,10 +9,6 @@ import java.util.List;
 @Entity
 public class Cuisine extends AbstractEntity{
 
-    @Id
-    @GeneratedValue
-    private int id;
-
 
     @OneToMany()
     @JoinColumn(name = "cuisine_id")

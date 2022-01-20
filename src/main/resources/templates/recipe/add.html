@@ -29,8 +29,26 @@
     <span th:errors="${recipe.instructions}" class="error"></span>
 
   </div>
+  <div class="form-group">
+    <label th:for="cuisine">Cuisine</label>
+    <select name="cuisineId">
+      <option th:each="cuisine : ${cuisines}"
+              th:text="${cuisine.name}"
+              th:value="${cuisine.id}"></option>
 
+    </select>
+    <a th:href="@{'/cuisine/add'}">Add Cuisine</a>
 
+  </div>
+
+  <div class="form-group">
+    <label th:for="dietaryRestrictions">Dietary Restrictions :</label>
+    <th:block th:each="dietaryRestriction : ${dietaryRestrictions}">
+      <input type="checkbox" name="dietaryRestrictions" th:value="${dietaryRestriction.id}">
+      <label th:text="${dietaryRestriction.name}"></label>
+    </th:block>
+    <a th:href="@{'/dietaryrestrictions/add'}">Add DietaryRestrictions</a>
+  </div>
 
 
 
