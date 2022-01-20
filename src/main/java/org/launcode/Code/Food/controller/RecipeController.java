@@ -51,12 +51,20 @@ public class RecipeController {
         if(optCuisine.isPresent()) {
             newRecipe.setCuisine(optCuisine.get());
         }
+
+        for (Integer dietaryRestrictionId : dietaryRestrictions) {
+            Optional<DietaryRestriction> maybeDietaryRestriction = dietaryRestrictionRepository.findById(dietaryRestrictionId);
+            if (maybeDietaryRestriction.isEmpty()) {
+                model.addAttribute("title", "Invalid Dietary Restriction ID: " + dietaryRestrictionId);
+                return "add";
+            }
+        }
+
         List<DietaryRestriction> dietaryRestrictionsObjs = (List<DietaryRestriction>)dietaryRestrictionRepository.findAllById(dietaryRestrictions);
         newRecipe.setDietaryRestrictions(dietaryRestrictionsObjs);
-        recipeRepository.save(newRecipe);
 
         recipeRepository.save(newRecipe);
-        return "redirect:";
+        return "recipe/view/" + newRecipe.getId();
     }
 
     @GetMapping("view/{recipeId}")
@@ -66,6 +74,7 @@ public class RecipeController {
         if (optRecipe.isPresent()) {
             Recipe recipe = (Recipe) optRecipe.get();
             model.addAttribute("recipe", recipe);
+            model.addAttribute("dietaryRestrictions", recipe.getDietaryRestrictions());
             return "recipe/view";
         } else {
             return "redirect:../";
@@ -89,8 +98,6 @@ public class RecipeController {
         }
         return "redirect:";
     }
-
-
 
 }
 
