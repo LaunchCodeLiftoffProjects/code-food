@@ -40,6 +40,7 @@ public class HomeController {
         return "index";
     }
 
+/*
 
     @GetMapping("add")
     public String displayAddRecipeForm(Model model) {
@@ -102,6 +103,7 @@ public class HomeController {
         }
         return "view";
     }
+*/
 
 }
 
