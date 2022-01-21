@@ -13,13 +13,13 @@ import java.util.List;
 public class Recipe extends AbstractEntity{
 
 
-  @NotBlank
-  @Lob // specifies that database should store the property as Large object (long text) instead of varchar
-public String ingredients;
+    @NotBlank
+    @Lob // specifies that database should store the property as Large object (long text) instead of varchar
+    public String ingredients;
 
-@NotBlank
-@Lob
-public String instructions;
+    @NotBlank
+    @Lob
+    public String instructions;
 
     @ManyToOne
     private Cuisine cuisine;
@@ -29,6 +29,20 @@ public String instructions;
 
     public Recipe() {}
 
+    public Recipe(Cuisine cuisine, List<DietaryRestriction> dietaryRestrictions) {
+        this.cuisine = cuisine;
+        this.dietaryRestrictions = dietaryRestrictions;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "ingredients='" + ingredients + '\'' +
+                ", instructions='" + instructions + '\'' +
+                '}';
+    }
+
+    // Getters and setters.
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
     }
@@ -45,23 +59,6 @@ public String instructions;
         this.instructions = instructions;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "ingredients='" + ingredients + '\'' +
-                ", instructions='" + instructions + '\'' +
-                '}';
-    }
-
-
-   // public Recipe(Cuisine cuisine, List<DietaryRestriction> dietaryRestrictions) {
-     //   this.cuisine = cuisine;
-    //    this.dietaryRestrictions = dietaryRestrictions;
-   // }
-
-
-
-    // Getters and setters.
     public Cuisine getCuisine() {
         return cuisine;
     }
