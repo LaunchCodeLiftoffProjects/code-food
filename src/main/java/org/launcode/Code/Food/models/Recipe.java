@@ -27,11 +27,16 @@ public class Recipe extends AbstractEntity{
     @ManyToMany
     private List<DietaryRestriction> dietaryRestrictions = new ArrayList<>();
 
+    @ManyToMany
+    private List<MealType> mealTypes = new ArrayList<>();
+
     public Recipe() {}
 
-    public Recipe(Cuisine cuisine, List<DietaryRestriction> dietaryRestrictions) {
+    public Recipe(Cuisine cuisine, List<DietaryRestriction> dietaryRestrictions,
+                  List<MealType> mealTypes) {
         this.cuisine = cuisine;
         this.dietaryRestrictions = dietaryRestrictions;
+        this.mealTypes = mealTypes;
     }
 
     @Override
@@ -79,5 +84,13 @@ public class Recipe extends AbstractEntity{
         this.dietaryRestrictions.add(dietaryRestriction);
     }
 
+    public List<MealType> getMealTypes() { return mealTypes; }
 
+    public void setMealTypes(List<MealType> mealTypes) {
+        this.mealTypes = mealTypes;
+    }
+
+    public void addMealType(MealType mealType) {
+        this.mealTypes.add(mealType);
+    }
 }

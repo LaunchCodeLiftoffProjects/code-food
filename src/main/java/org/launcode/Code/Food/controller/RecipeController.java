@@ -1,9 +1,11 @@
 package org.launcode.Code.Food.controller;
 import org.launcode.Code.Food.models.Cuisine;
 import org.launcode.Code.Food.models.DietaryRestriction;
+import org.launcode.Code.Food.models.MealType;
 import org.launcode.Code.Food.models.Recipe;
 import org.launcode.Code.Food.models.data.CuisineRepository;
 import org.launcode.Code.Food.models.data.DietaryRestrictionRepository;
+import org.launcode.Code.Food.models.data.MealTypeRepository;
 import org.launcode.Code.Food.models.data.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,22 +29,28 @@ public class RecipeController {
     @Autowired
     private DietaryRestrictionRepository dietaryRestrictionRepository;
 
+    @Autowired
+    private MealTypeRepository mealTypeRepository;
+
     @GetMapping("")
     public String index(Model model){
-        model.addAttribute("recipes",recipeRepository.findAll());
+        model.addAttribute("recipes", recipeRepository.findAll());
         return "recipe/index";
     }
 
     @GetMapping("add")
     public String displayAddRecipeForm(Model model) {
         model.addAttribute(new Recipe());
-        model.addAttribute("cuisines",cuisineRepository.findAll());
-        model.addAttribute("dietaryRestrictions",dietaryRestrictionRepository.findAll());
+        model.addAttribute("cuisines", cuisineRepository.findAll());
+        model.addAttribute("dietaryRestrictions", dietaryRestrictionRepository.findAll());
+        model.addAttribute("mealTypes", mealTypeRepository.findAll());
         return "recipe/add";
     }
     @PostMapping("add")
-    public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe,
-                                        Errors errors, Model model,@RequestParam int cuisineId,@RequestParam List<Integer> dietaryRestrictions) {
+    public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe, Errors errors, Model model,
+                                       @RequestParam int cuisineId,
+                                       @RequestParam List<Integer> dietaryRestrictions,
+                                       @RequestParam List<Integer> mealTypes) {
 
         if (errors.hasErrors()) {
             return "recipe/add";
@@ -59,9 +67,18 @@ public class RecipeController {
                 return "add";
             }
         }
-
         List<DietaryRestriction> dietaryRestrictionsObjs = (List<DietaryRestriction>)dietaryRestrictionRepository.findAllById(dietaryRestrictions);
         newRecipe.setDietaryRestrictions(dietaryRestrictionsObjs);
+
+        for (Integer mealTypeId : mealTypes) {
+            Optional<MealType> maybeMealType = mealTypeRepository.findById(mealTypeId);
+            if (maybeMealType.isEmpty()) {
+                model.addAttribute("title", "Invalid Meal Type ID: " + mealTypeId);
+                return "add";
+            }
+        }
+        List<MealType> mealTypesObjs = (List<MealType>)mealTypeRepository.findAllById(mealTypes);
+        newRecipe.setMealTypes(mealTypesObjs);
 
         recipeRepository.save(newRecipe);
         return "recipe/view/" + newRecipe.getId();
@@ -74,7 +91,9 @@ public class RecipeController {
         if (optRecipe.isPresent()) {
             Recipe recipe = (Recipe) optRecipe.get();
             model.addAttribute("recipe", recipe);
+            model.addAttribute("cuisine", recipe.getCuisine());
             model.addAttribute("dietaryRestrictions", recipe.getDietaryRestrictions());
+            model.addAttribute("mealTypes", recipe.getMealTypes());
             return "recipe/view";
         } else {
             return "redirect:../";
