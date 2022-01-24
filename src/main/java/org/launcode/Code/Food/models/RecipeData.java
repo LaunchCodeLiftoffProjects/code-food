@@ -55,9 +55,9 @@ public class RecipeData {
         if (fieldName.equals("dietaryRestriction")){
             theValue = recipe.getDietaryRestrictions().toString();
         }
-//        if (fieldName.equals("mealType")){
-//            theValue = recipe.getMealType().toString();
-//        }
+        if (fieldName.equals("mealType")){
+            theValue = recipe.getMealTypes().toString();
+        }
         return theValue;
     }
 
@@ -81,6 +81,8 @@ public class RecipeData {
                 results.add(recipe);
             } else if (recipe.getDietaryRestrictions().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
+            } else if (recipe.getMealTypes().toString().toLowerCase().contains(lower_val)) {
+                results.add(recipe);
             } else if (recipe.toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
             }
@@ -89,4 +91,3 @@ public class RecipeData {
     }
 
 }
-
