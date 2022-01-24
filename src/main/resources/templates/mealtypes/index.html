@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<p th:unless="${mealTypes} and ${mealTypes.size()}">no matching recipes!</p>
+
+<div class="container body-content">
+    <h2>Meal Types</h2>
+    <ul>
+        <li th:each="mealType : ${mealTypes}">
+            <a th:href="@{'/mealtypes/view/' + ${mealType.id}}" th:text="${mealType.name}"></a>
+        </li>
+    </ul>
+    <a th:href="@{'/mealtypes/add'}">Add Meal Types</a>
+
+</div>
+
+</body>
+</html>
