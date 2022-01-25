@@ -3,6 +3,7 @@ package org.launcode.Code.Food.controller;
 import org.launcode.Code.Food.models.MealType;
 import org.launcode.Code.Food.models.data.MealTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -26,12 +27,14 @@ public class MealTypeController {
     }
 
     @GetMapping("add")
+    @PreAuthorize("hasAuthority('recipe:write')")
     public String displayAddMealTypeForm(Model model) {
         model.addAttribute(new MealType());
         return "mealtypes/add";
     }
 
     @PostMapping("add")
+    @PreAuthorize("hasAuthority('recipe:write')")
     public String processAddMealTypeForm(@ModelAttribute @Valid MealType newMealType, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title","Meal Types");
@@ -57,6 +60,7 @@ public class MealTypeController {
     }
 
     @GetMapping("delete")
+    @PreAuthorize("hasAuthority('recipe:write')")
     public String displayDeleteMealTypeForm(Model model){
         model.addAttribute("title","Delete Meal Type");
         model.addAttribute("mealTypes", mealTypeRepository.findAll());
@@ -64,6 +68,7 @@ public class MealTypeController {
     }
 
     @PostMapping("delete")
+    @PreAuthorize("hasAuthority('recipe:write')")
     public String deleteMealTypeListings(@RequestParam(required = false) int[] mealTypeIds){
         if(mealTypeIds!=null) {
             for (int id : mealTypeIds) {

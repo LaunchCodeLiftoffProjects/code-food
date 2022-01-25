@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import static org.launcode.Code.Food.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
-    USER(Sets.newHashSet(CUISINE_READ)),
-    ADMIN(Sets.newHashSet(COURSE_READ, COURSE_WRITE, USER_READ, USER_WRITE, CUISINE_READ, CUISINE_WRITE)),
+    USER(Sets.newHashSet(RECIPE_READ)),
+    ADMIN(Sets.newHashSet(COURSE_READ, COURSE_WRITE, USER_READ, USER_WRITE, RECIPE_READ, RECIPE_WRITE)),
     ADMINTRAINEE(Sets.newHashSet(COURSE_READ, USER_READ));
 
 

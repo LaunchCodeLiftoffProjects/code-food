@@ -5,8 +5,8 @@ public enum ApplicationUserPermission {
     USER_WRITE("user:write"),
     COURSE_READ("course:read"),
     COURSE_WRITE("course:write"),
-    CUISINE_READ("cuisine:read"),
-    CUISINE_WRITE("cuisine:write");
+    RECIPE_READ("recipe:read"),
+    RECIPE_WRITE("recipe:write");
 
 
     private final String permission;
