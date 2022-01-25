@@ -15,7 +15,10 @@
             <a th:href="@{'/mealtypes/view/' + ${mealType.id}}" th:text="${mealType.name}"></a>
         </li>
     </ul>
-    <a th:href="@{'/mealtypes/add'}">Add Meal Types</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link" th:href="@{'/mealtypes/add'}">Add Meal Type</a></li>
+        <li><a th:href="@{'/mealtypes/delete'}">Delete Meal Type</a></li>
+    </ul>
 
 </div>
 
