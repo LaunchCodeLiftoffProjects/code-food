@@ -11,12 +11,11 @@ import java.util.List;
 @Entity
 public class Recipe extends AbstractEntity{
 
+    @NotBlank
+    public String ingredients;
 
-  @NotBlank
-public String ingredients;
-
-@NotBlank
-public String instructions;
+    @NotBlank
+    public String instructions;
 
     public void setIngredients(String ingredients) {
         this.ingredients = ingredients;
@@ -46,7 +45,7 @@ public String instructions;
     private Cuisine cuisine;
 
     @ManyToMany
-   private List<DietaryRestriction> dietaryRestrictions = new ArrayList<>();
+    private List<DietaryRestriction> dietaryRestrictions = new ArrayList<>();
 
    // public Recipe(Cuisine cuisine, List<DietaryRestriction> dietaryRestrictions) {
      //   this.cuisine = cuisine;

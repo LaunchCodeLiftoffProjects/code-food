@@ -3,6 +3,7 @@ package org.launcode.Code.Food.controller;
 import org.launcode.Code.Food.models.Cuisine;
 import org.launcode.Code.Food.models.data.CuisineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,16 +20,21 @@ public class CuisineController {
     private CuisineRepository cuisineRepository;
 
     @GetMapping("")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public String index(Model model){
         model.addAttribute("cuisines",cuisineRepository.findAll());
         return "cuisine/index";
     }
+
     @GetMapping("add")
+    @PreAuthorize("hasAuthority('cuisine:write')")
     public String displayAddCuisineForm(Model model) {
         model.addAttribute(new Cuisine());
         return "cuisine/add";
     }
+
     @PostMapping("add")
+    @PreAuthorize("hasAuthority('cuisine:write')")
     public String processAddCuisineForm(@ModelAttribute @Valid Cuisine newCuisine,
                                         Errors errors, Model model) {
 
@@ -40,6 +46,7 @@ public class CuisineController {
     }
 
     @GetMapping("view/{cuisineId}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     public String displayViewCuisine(Model model, @PathVariable int cuisineId) {
 
         Optional<Cuisine> optCuisine = cuisineRepository.findById(cuisineId);
@@ -53,6 +60,7 @@ public class CuisineController {
     }
 
     @GetMapping("delete")
+    @PreAuthorize("hasAuthority('cuisine:write')")
     public String displayDeleteCuisineForm(Model model){
         model.addAttribute("title","Delete Cuisine");
         model.addAttribute("cuisines",cuisineRepository.findAll());
@@ -60,6 +68,7 @@ public class CuisineController {
     }
 
     @PostMapping("delete")
+    @PreAuthorize("hasAuthority('cuisine:write')")
     public String deleteCuisineListings(@RequestParam(required = false) int[] cuisineIds){
         if(cuisineIds!=null) {
             for (int id : cuisineIds) {
