@@ -14,6 +14,7 @@
 <table class="centeredTable">
     <tr>
         <th>All</th>
+        <th>Cuisine</th>
         <th>Dietary Restrictions</th>
         <th>Meal Type</th>
     </tr>
@@ -24,6 +25,12 @@
                 <a th:href="@{/list/recipes(column='All',value='View All')}">View All</a>
             </li>
         </td>
+        <td>
+            <li th:each="cuisine : ${cuisines}">
+                <a th:href="@{/list/recipes(column=cuisine,value=${cuisine.name})}" th:text="${cuisine.name}"></a>
+            </li>
+        </td>
+
         <td>
             <li th:each="dietaryRestrictions : ${dietaryRestrictions}">
                 <a th:href="@{/list/recipes(column=dietaryRestriction,value=${dietaryRestrictions.name})}" th:text="${dietaryRestriction.name}"></a>

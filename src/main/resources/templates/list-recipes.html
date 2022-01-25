@@ -15,12 +15,12 @@
             <td>
                 <p>
                     Recipe Id:
-                    <a th:href="@{'/view/' + ${recipe.id}}" th:text="${recipe.id}"></a>
+                    <a th:href="@{'/recipe/view/' + ${recipe.id}}" th:text="${recipe.id}"></a>
                 </p>
                 <p th:text="${'Name: ' + recipe.name}"></p>
                 <p>
                     Cuisine:
-                    <a th:href="@{'/cuisines/view/' + ${recipe.cuisine.id}}" th:text="${recipe.cuisine.name}"></a>
+                    <a th:href="@{'/cuisine/view/' + ${recipe.cuisine.id}}" th:text="${recipe.cuisine.name}"></a>
                 </p>
                 <p>
                     Dietary Restrictions:
@@ -29,6 +29,14 @@
                             <a th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a>
                         </li>
                     </ul>
+                </p>
+                <p>
+                Meal Types:
+                <ul th:each="mealType : ${recipe.mealTypes}">
+                    <li>
+                        <a th:href="@{'/mealtypes/view/' + ${mealType.id}}" th:text="${mealType.name}"></a>
+                    </li>
+                </ul>
                 </p>
             </td>
         </tr>

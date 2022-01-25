@@ -26,13 +26,13 @@ public class DietaryRestrictionController {
     }
 
     @GetMapping("add")
-    public String displayAddDietaryForm(Model model) {
+    public String displayAddDietaryRestrictionForm(Model model) {
         model.addAttribute(new DietaryRestriction());
         return "dietaryrestrictions/add";
     }
 
     @PostMapping("add")
-    public String processAddDietaryForm(@ModelAttribute @Valid DietaryRestriction newDietaryRestriction, Errors errors, Model model) {
+    public String processAddDietaryRestrictionForm(@ModelAttribute @Valid DietaryRestriction newDietaryRestriction, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title","Dietary Restrictions");
             model.addAttribute(newDietaryRestriction);
