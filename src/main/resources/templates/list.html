@@ -26,17 +26,20 @@
             </li>
         </td>
         <td>
+            <li><a th:href="@{/cuisine}">View All Cuisines</a></li>
             <li th:each="cuisine : ${cuisines}">
                 <a th:href="@{/list/recipes(column=cuisine_id,value=${cuisine.name})}" th:text="${cuisine.name}"></a>
             </li>
         </td>
 
         <td>
+            <li><a th:href="@{/dietaryrestrictions}">View All Dietary Restrictions</a></li>
             <li th:each="dietaryRestrictions : ${dietaryRestrictions}">
                 <a th:href="@{/list/recipes(column=dietaryRestriction,value=${dietaryRestrictions.name})}" th:text="${dietaryRestriction.name}"></a>
             </li>
         </td>
         <td>
+            <li><a th:href="@{/mealtypes}">View All Meal Types</a></li>
             <li th:each="mealType : ${mealTypes}">
                 <a th:href="@{/list/recipes(column=mealType,value=${mealType.name})}" th:text="${mealType.name}"></a>
             </li>
