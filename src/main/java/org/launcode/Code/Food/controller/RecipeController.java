@@ -85,7 +85,7 @@ public class RecipeController {
         newRecipe.setMealTypes(mealTypesObjs);
 
         recipeRepository.save(newRecipe);
-        return "recipe/view/" + newRecipe.getId();
+        return "redirect:/recipe/view/" + newRecipe.getId();
     }
 
     @GetMapping("view/{recipeId}")
