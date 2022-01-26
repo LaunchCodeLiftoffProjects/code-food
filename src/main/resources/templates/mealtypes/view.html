@@ -13,7 +13,7 @@
     <p> Recipes:
         <ul>
             <li th:each="recipe : ${mealType.recipes}">
-                <a th:href="@{'/view/' + ${recipe.id}}" th:text="${recipe.name}"></a>
+                <a th:href="@{'/recipe/view/' + ${recipe.id}}" th:text="${recipe.name}"></a>
             </li>
         </ul>
     </p>

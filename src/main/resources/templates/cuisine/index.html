@@ -15,11 +15,10 @@
             <a th:href="@{'/cuisine/view/' + ${cuisine.id}}" th:text="${cuisine.name}"></a>
         </li>
     </ul>
-
-        <ul class="nav navbar-nav">
-          <li class="nav-item"><a class="nav-link" th:href="@{'/cuisine/add'}">Add Cuisine</a></li>
-           <li><a th:href="@{'/cuisine/delete'}">Delete Cuisine</a></li>
-        </ul>
+    <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link" th:href="@{'/cuisine/add'}">Add Cuisine</a></li>
+        <li><a th:href="@{'/cuisine/delete'}">Delete Cuisine</a></li>
+    </ul>
 
 </div>
 
