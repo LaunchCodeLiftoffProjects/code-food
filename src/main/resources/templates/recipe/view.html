@@ -8,10 +8,13 @@
 <nav th:replace="fragments :: page-header"></nav>
 
 <div class="job-listing">
-    <p th:text="${'Name: ' + recipe.name}"></p>
-
+    <p class="thicker" >Name:</p> <p th:text="${recipe.name}"></p>
+    <p class="thicker" >Ingredients: </p>  <p th:text="${recipe.ingredients}"></p>
+    <p class="thicker" >Instructions:</p>  <p th:text="${recipe.instructions}"></p>
+    <p class="thicker" >Cuisine:</p> <p th:text="${recipe.cuisine.name}"></p>
+    <p class="thicker" >Dietary Restrictions:</p> <p th:text="${recipe.dietaryRestrictions}"></p>
+    <p class="thicker" >Meal Type:</p> <p th:text="${recipe.mealTypes}"></p>
 </div>
-
 
 </body>
 </html>
