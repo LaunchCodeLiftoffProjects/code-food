@@ -34,8 +34,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) //Adds more encryption for requests sent from browsers
-                .and()
+//                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()) //Adds more encryption for requests sent from browsers
+//                .and()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*", "/assets.img/*",
                         "/cuisine", "/cuisine/view/*", "/dietaryrestrictions", "/dietaryrestrictions/view/*",
