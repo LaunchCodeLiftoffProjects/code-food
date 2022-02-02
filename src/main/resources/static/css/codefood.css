@@ -60,3 +60,13 @@ div.recipe-listing {
     width: 80%;
     background-color: #e4e4e4;
 }
+
+
+table4.recipe-listing {
+    margin: 30px auto;
+    border: 1px solid #e4e4e4;
+    width: 80%;
+}
+p.thicker {
+  font-weight: 900;
+}
