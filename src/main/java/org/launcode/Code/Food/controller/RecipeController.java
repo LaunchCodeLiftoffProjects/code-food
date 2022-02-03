@@ -124,5 +124,57 @@ public class RecipeController {
         return "redirect:";
     }
 
-}
+    @GetMapping("update")
+    @PreAuthorize("hasAuthority('recipe:write')")
+    public String displayUpdateForm(Model model){
+        model.addAttribute("title","UpdateRecipes");
+        model.addAttribute("recipes",recipeRepository.findAll());
+        return"recipe/update";
+    }
+
+    @GetMapping("updateDetails")
+    @PreAuthorize("hasAuthority('recipe:write')")
+    public String displayUpdateDetailsForm(Model model,int recipeId){
+        Optional<Recipe> oppRecipeEdit=recipeRepository.findById(recipeId);
+        Recipe recipeToEdit=(Recipe) oppRecipeEdit.get();
+        model.addAttribute("recipe",recipeToEdit);
+        model.addAttribute("cuisines",cuisineRepository.findAll());
+        model.addAttribute("dietaryRestrictions",dietaryRestrictionRepository.findAll());
+        model.addAttribute("mealTypes",mealTypeRepository.findAll());
+        return "recipe/updateDetails";
+    }
+
+    @PostMapping("updateDetails")
+    @PreAuthorize("hasAuthority('recipe:write')")
+    public String processUpdateDetailsForm(@ModelAttribute @Valid Recipe recipeToEdit,Errors errors,Model model,@RequestParam Integer recipeId,@RequestParam(required = false) String name,@RequestParam String ingredients,@RequestParam String instructions,
+                                                  @RequestParam Integer cuisine,@RequestParam List<Integer> dietaryRestrictions,@RequestParam List<Integer> mealTypes) {
+        if (errors.hasErrors()) {
+            model.addAttribute("recipes",recipeRepository.findAll());
+            model.addAttribute("cuisines",cuisineRepository.findAll());
+            model.addAttribute("dietaryRestrictions",dietaryRestrictionRepository.findAll());
+            model.addAttribute("mealTypes",mealTypeRepository.findAll());
+            return "recipe/updateDetails";
+        }
+        Optional<Recipe> oppRecipeEdit = recipeRepository.findById(recipeId);
+        recipeToEdit = (Recipe) oppRecipeEdit.get();
+        recipeToEdit.setName(name);
+        recipeToEdit.setIngredients(ingredients);
+        recipeToEdit.setInstructions(instructions);
+        Optional<Cuisine> oppCuisine = cuisineRepository.findById(cuisine);
+        Cuisine editCuisine = (Cuisine) oppCuisine.get();
+        recipeToEdit.setCuisine(editCuisine);
+        List<DietaryRestriction> editDietaryRestrictions = (List<DietaryRestriction>) dietaryRestrictionRepository.findAllById(dietaryRestrictions);
+        recipeToEdit.setDietaryRestrictions(editDietaryRestrictions);
+        List<MealType> editMealTypes = (List<MealType>)mealTypeRepository.findAllById(mealTypes);
+        recipeToEdit.setMealTypes(editMealTypes);
+        recipeRepository.save(recipeToEdit);
+        return "redirect:";
+    }
+
+    }
+
+
+    
+
+
 

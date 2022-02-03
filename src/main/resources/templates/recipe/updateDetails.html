@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+
+<body class="container body-content">
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<h1>Update Recipe</h1>
+<form method="post" style="max-width:600px;">
+    <div class="form-group">
+        <label th:for="name">Recipe Name</label>
+        <input class="form-control" th:field="${recipe.name}">
+        <span th:errors="${recipe.name}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="name">Ingredients</label>
+        <textarea class="form-control" th:field="${recipe.ingredients}" />
+        <span th:errors="${recipe.ingredients}" class="error"></span>
+
+    </div>
+
+    <div class="form-group">
+        <label th:for="name">Instructions</label>
+        <textarea class="form-control" th:field="${recipe.instructions}" />
+        <p th:errors="${recipe.instructions}" class="error"></p>
+
+    </div>
+    <div class="form-group">
+        <label th:for="cuisine">Cuisine: </label>
+       <!-- <select name="cuisineId">
+            <option th:each="cuisine : ${cuisines}"
+                    th:text="${cuisine.name}"
+                    th:value="${cuisine.id}"></option>
+        </select>-->
+        <th:block th:each="cuisine : ${cuisines}">
+        <input th:if="${cuisine==recipe.cuisine}" type="radio" name="cuisine" th:value="${cuisine.id}" checked>
+        <input th:unless="${cuisine==recipe.cuisine}" type="radio" name="cuisine" th:value="${cuisine.id}">
+            <p class="error" th:errors="${recipe.cuisine}"></p>
+            <label th:text="${cuisine.name}"></label>
+        </th:block>
+        <a th:href="@{'/cuisine/add'}">Add Cuisine</a>
+    </div>
+
+    <div class="form-group">
+        <label th:for="dietaryRestrictions">Dietary Restrictions: </label>
+        <th:block th:each="dietaryRestriction : ${dietaryRestrictions}">
+            <input th:if="${recipe.dietaryRestrictions.contains(dietaryRestriction)}" type="checkbox" name="dietaryRestrictions" th:value="${dietaryRestriction.id}" checked>
+            <input th:unless="${recipe.dietaryRestrictions.contains(dietaryRestriction)}" type="checkbox" name="dietaryRestrictions" th:value="${dietaryRestriction.id}">
+            <p class="error" th:errors="${recipe.dietaryRestrictions}"></p>
+            <label th:text="${dietaryRestriction.name}"></label>
+        </th:block>
+        <a th:href="@{'/dietaryrestrictions/add'}">Add Dietary Restriction</a>
+    </div>
+
+    <div class="form-group">
+        <label th:for="mealTypes">Meal Types: </label>
+        <th:block th:each="mealType : ${mealTypes}">
+            <input th:if="${recipe.mealTypes.contains(mealType)}" type="checkbox" name="mealTypes" th:value="${mealType.id}" checked>
+            <input th:unless="${recipe.mealTypes.contains(mealType)}" type="checkbox" name="mealTypes" th:value="${mealType.id}" >
+            <p class="error" th:errors="${recipe.mealTypes}"></p>
+            <label th:text="${mealType.name}"></label>
+        </th:block>
+        <a th:href="@{'/mealtypes/add'}">Add Meal Type</a>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="hidden" name="recipeId" th:value="${recipe.id}">
+        </label>
+    </div>
+
+    <input type="submit" value="Update Recipe" class="btn btn-success" />
+
+</form>
+</body>
+</html>

@@ -186,6 +186,7 @@ table {
 td,
 th {
   padding: 0;
+  text-align:center;
 }
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
