@@ -39,6 +39,8 @@ public class Recipe extends AbstractEntity{
         this.mealTypes = mealTypes;
     }
 
+
+
     @Override
     public String toString() {
         return "Recipe{" +
