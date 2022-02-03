@@ -1,11 +1,16 @@
 package org.launcode.Code.Food.auth;
 
+import org.launcode.Code.Food.models.AbstractEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
 
 public class ApplicationUser implements UserDetails {
 

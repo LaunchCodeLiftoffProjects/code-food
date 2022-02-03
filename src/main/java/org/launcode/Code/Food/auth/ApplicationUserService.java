@@ -13,7 +13,7 @@ public class ApplicationUserService implements UserDetailsService {
     private final ApplicationUserDAO applicationUserDAO;
 
     @Autowired
-    public ApplicationUserService(@Qualifier("fake") ApplicationUserDAO applicationUserDAO) {
+    public ApplicationUserService(@Qualifier("security") ApplicationUserDAO applicationUserDAO) {
         this.applicationUserDAO = applicationUserDAO;
     }
 

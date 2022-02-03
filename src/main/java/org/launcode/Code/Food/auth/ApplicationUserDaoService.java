@@ -10,13 +10,13 @@ import java.util.Optional;
 
 import static org.launcode.Code.Food.security.ApplicationUserRole.*;
 
-@Repository("fake")
-public class FakeApplicationUserDaoService implements ApplicationUserDAO{
+@Repository("security")
+public class ApplicationUserDaoService implements ApplicationUserDAO{
 
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public FakeApplicationUserDaoService(PasswordEncoder passwordEncoder) {
+    public ApplicationUserDaoService(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -61,5 +61,4 @@ public class FakeApplicationUserDaoService implements ApplicationUserDAO{
 
         return applicationUsers;
     }
-
 }
