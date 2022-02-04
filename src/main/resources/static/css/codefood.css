@@ -60,3 +60,13 @@ div.recipe-listing {
     width: 80%;
     background-color: #e4e4e4;
 }
+
+
+
+.recipe-card .row {
+    display: flex;
+}
+
+.recipe-card .card {
+    flex: 1;
+}
