@@ -1,46 +1,46 @@
 package org.launcode.Code.Food.auth;
 
-import org.launcode.Code.Food.models.AbstractEntity;
+import org.launcode.Code.Food.models.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class ApplicationUser implements UserDetails {
 
-    private final String password;
-    private  final String username;
-    private final Set<? extends GrantedAuthority> grantedAuthorities;
-    private final boolean isAccountNonExpired;
-    private final boolean isAccountNonLocked;
-    private final boolean isCredentialsNonExpired;
-    private final boolean isEnabled;
+    private String userName;
+    private String password;
+    private boolean active;
+    private List<GrantedAuthority> authorities;
+//    private final boolean isAccountNonExpired;
+//    private final boolean isAccountNonLocked;
+//    private final boolean isCredentialsNonExpired;
+//    private final boolean isEnabled;
 
-    public ApplicationUser(String password,
-                           String username,
-                           Set<? extends GrantedAuthority> grantedAuthorities,
-                           boolean isAccountNonExpired,
-                           boolean isAccountNonLocked,
-                           boolean isCredentialsNonExpired,
-                           boolean isEnabled) {
-        this.grantedAuthorities = grantedAuthorities;
-        this.password = password;
-        this.username = username;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
+    public ApplicationUser(User user) {
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
+        this.active = user.isActive();
+        this.authorities = Arrays.stream(user.getRoles().split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+//        this.isAccountNonExpired = isAccountNonExpired;
+//        this.isAccountNonLocked = isAccountNonLocked;
+//        this.isCredentialsNonExpired = isCredentialsNonExpired;
+//        this.isEnabled = isEnabled;
+    }
+
+    public ApplicationUser() {
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return grantedAuthorities;
+        return authorities;
     }
 
     @Override
@@ -50,26 +50,26 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return isAccountNonExpired;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return isAccountNonLocked;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return isCredentialsNonExpired;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return isEnabled;
+        return active;
     }
 }

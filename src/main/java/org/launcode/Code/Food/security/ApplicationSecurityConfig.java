@@ -22,14 +22,14 @@ import static org.launcode.Code.Food.security.ApplicationUserRole.*;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
-    private final ApplicationUserService applicationUserService;
-
     @Autowired
-    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService) {
-        this.passwordEncoder = passwordEncoder;
-        this.applicationUserService = applicationUserService;
-    }
+    ApplicationUserService applicationUserService;
+
+//    @Autowired
+//    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService) {
+//        this.passwordEncoder = passwordEncoder;
+//        this.applicationUserService = applicationUserService;
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -41,9 +41,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "index", "/css/*", "/js/*", "/assets.img/*",
                         "/cuisine", "/cuisine/view/*", "/dietaryrestrictions", "/dietaryrestrictions/view/*",
                         "/mealtypes", "/mealtypes/view/*", "/recipe", "/recipe/view/*",
+                        "/user/*",
                         "/list", "/list/*").permitAll() //Allows for pages containing these to be accessed without logging in
                 .antMatchers("/api/**").hasRole(USER.name()) //Allows regular users to access their account
-                .antMatchers("/add/**").hasRole(ADMIN.name()) //Allows only admin access to adding
+//                .antMatchers("/add/**").hasRole(ADMIN.name()) //Allows only admin access to adding
                 .antMatchers("/delete/**").hasRole(ADMIN.name()) //Allows only admin access to deleting
                 .anyRequest()
                 .authenticated()
@@ -70,16 +71,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
+        auth.userDetailsService(applicationUserService);
     }
 
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(applicationUserService);
-        return provider;
-    }
+//    @Bean
+//    public DaoAuthenticationProvider daoAuthenticationProvider() {
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setPasswordEncoder(passwordEncoder);
+//        provider.setUserDetailsService(applicationUserService);
+//        return provider;
+//    }
 
 //    @Override
 //    @Bean
