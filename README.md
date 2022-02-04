@@ -36,3 +36,7 @@ https://trello.com/b/hp3W4kC6/liftoff
 
 ### Wireframes- New
 https://www.tldraw.com/r/1640747713280
+
+### Presentation
+[Code_Food Presentation (1).pdf](https://github.com/LaunchCodeLiftoffProjects/naila-group/files/7999387/Code_Food.Presentation.1.pdf)
+
