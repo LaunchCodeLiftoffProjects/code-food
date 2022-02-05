@@ -22,9 +22,12 @@
         <tr th:each="recipe:${recipes}">
             <td th:text="${recipe.id}"></td>
             <td th:text="${recipe.name}"></td>
-            <td th:text="${recipe.cuisine.name}"></td>
-            <td th:text="${recipe.dietaryRestrictions}"></td>
-            <td th:text="${recipe.mealTypes}"></td>
+            <td th:if="${recipe.cuisine !=null}"   th:text="${recipe.cuisine.name}"></td>
+            <td th:unless="${recipe.cuisine !=null}" >N/A</td>
+            <td th:if="${recipe.dietaryRestrictions.size()>0}"th:text="${recipe.dietaryRestrictions}"></td>
+            <td th:unless="${recipe.dietaryRestrictions.size()>0}" >N/A</td>
+            <td th:if="${recipe.mealTypes.size()>0}" th:text="${recipe.mealTypes}"></td>
+            <td th:unless="${recipe.mealTypes.size()>0}" >N/A</td>
 
             <!--<td th:each="mealType:${recipe.mealTypes}">
                 <p th:text="${mealType.name}"></p>
