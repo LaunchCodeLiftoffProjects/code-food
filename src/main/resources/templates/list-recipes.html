@@ -1,59 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
-    // css bundle for bootstrap (in this case for the cards)
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-          crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
+
 <div th:replace="fragments :: page-header"></div>
 
-<!--<section id="recipes" class="p-5 bg-primary">-->
-<!--    <div class="card" style="width: 18rem;">-->
-<!--        <img src="..." class="card-img-top" alt="...">-->
-<!--        <div class="card-body">-->
-<!--            <h5 class="card-title">Card title</h5>-->
-<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-<!--            <a href="#" class="btn btn-primary">Go somewhere</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-
-<section class="recipes">
-    <div>
-        <h5 class="title" th:text="${#strings.capitalizeWords(title)}"></h5>
+<div class="recipes col-10 offset-1">
+    <div class="row">
+        <div class="col">
+            <h3 class="title" th:text="${#strings.capitalizeWords(title)}"></h3>
+        </div>
     </div>
-    <div class="container p-5 recipe-card">
-        <div class="row">
-            <div class="card col-4" th:each="recipe : ${recipes}">
-                <p th:text="${'Recipe: ' + recipe.name}"></p>
-                <div>
-                    <p>Cuisine: <a th:href="@{'/cuisine/view/' + ${recipe.cuisine?.id}}" th:text="${recipe.cuisine?.name}"></a></p>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+            <div class="card h-100" th:each="recipe : ${recipes}">
+                <img src="..." class="card-img-top" alt="Recipe Image">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${'Recipe: ' + recipe.name}"></h4>
+                    <div class="row">
+                        <div class="col-6 title"><h5>Cuisine</h5></div>
+                        <div class="col-6 content">
+                            <a th:href="@{'/cuisine/view/' + ${recipe.cuisine?.id}}" th:text="${recipe.cuisine?.name}"></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 title"><h5>Dietary Restrictions</h5></div>
+                        <div class="col-6 content">
+                            <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
+                                <li><a th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction?.id}}" th:text="${dietaryRestriction?.name}"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 title"><h5>Meal Types</h5></div>
+                        <div class="col-6 content">
+                            <ul th:each="mealType : ${recipe.mealTypes}">
+                                <li><a th:href="@{'/mealtypes/view/' + ${mealType?.id}}" th:text="${mealType?.name}"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
-                <div>
-                    <p>Dietary Restrictions:</p>
-                    <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
-                        <li>
-                            <a th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction?.id}}" th:text="${dietaryRestriction?.name}"></a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <p>Meal Types:</p>
-                    <ul th:each="mealType : ${recipe.mealTypes}">
-                        <li>
-                            <a th:href="@{'/mealtypes/view/' + ${mealType?.id}}" th:text="${mealType?.name}"></a>
-                        </li>
-                    </ul>
-                </div>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
         </div>
     </div>
-</section>
+</div>
+
 
 </body>
 </html>

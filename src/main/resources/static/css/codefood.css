@@ -55,18 +55,21 @@ p {
     margin-right: auto;
 }
 
-div.recipe-listing {
-    border: 1px solid #e4e4e4;
-    width: 80%;
+
+
+.recipes {
+    padding-top: 100px;
+}
+
+.recipes .card {
+    border: 1px solid red;
     background-color: #e4e4e4;
 }
 
-
-
-.recipe-card .row {
-    display: flex;
+.recipes h3, .recipes h4, .recipes a.btn{
+    text-align: center;
 }
 
-.recipe-card .card {
-    flex: 1;
+.recipes h5, .recipes p, .recipes li {
+    text-align: center;
 }
