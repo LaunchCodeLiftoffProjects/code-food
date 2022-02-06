@@ -54,22 +54,3 @@ p {
     margin-left: auto;
     margin-right: auto;
 }
-
-
-
-.recipes {
-    padding-top: 100px;
-}
-
-.recipes .card {
-    border: 1px solid red;
-    background-color: #e4e4e4;
-}
-
-.recipes h3, .recipes h4, .recipes a.btn{
-    text-align: center;
-}
-
-.recipes h5, .recipes p, .recipes li {
-    text-align: center;
-}
