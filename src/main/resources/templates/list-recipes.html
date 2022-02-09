@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="text-center my-4">
-                        <a href="#" class="btn btn-warning">View Recipe</a>     <!-- currently non-functional-->
+                        <a th:href="@{'/view/' + ${recipe.id}}" class="btn btn-warning">View Recipe</a>
 
                     </div>
 
