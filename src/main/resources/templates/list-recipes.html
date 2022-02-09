@@ -25,19 +25,19 @@
                         <span class="float-start badge rounded-pill bg-success"><a class="no-underline" th:href="@{'/cuisine/view/' + ${recipe.cuisine?.id}}" th:text="${recipe.cuisine?.name}"></a></span>
                     </div>
                     <h3 class="card-title" th:text="${recipe.name}"></h3>
-                    <div class="row">
+                    <div class="row" th:if="${recipe.dietaryRestrictions.size()>0}">
                         <div class="col title"><h5>Dietary Restrictions</h5></div>
                         <div class="col content">
                             <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
-                                <li><a class="no-underline" th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction?.id}}" th:text="${dietaryRestriction?.name}"></a></li>
+                                <li><a class="no-underline" th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a></li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" th:if="${recipe.mealTypes.size()>0}">
                         <div class="col title"><h5>Meal Types</h5></div>
                         <div class="col content">
                             <ul th:each="mealType : ${recipe.mealTypes}">
-                                <li><a class="no-underline" th:href="@{'/mealtypes/view/' + ${mealType?.id}}" th:text="${mealType?.name}"></a></li>
+                                <li><a class="no-underline" th:href="@{'/mealtypes/view/' + ${mealType.id}}" th:text="${mealType.name}"></a></li>
                             </ul>
                         </div>
                     </div>
