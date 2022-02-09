@@ -1,4 +1,10 @@
-.recipes .row .col .recipe-card {
+.recipes .recipe-col {
+    flex: 1 0 auto;
+    min-width: 360px;
+    margin-bottom: 5%;
+}
+
+.recipes .recipe-card {
     background: #fff;
     box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
     border: 2px solid black !important;

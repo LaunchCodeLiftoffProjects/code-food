@@ -10,13 +10,13 @@
 
 <!--<div th:replace="fragments :: page-header"></div>-->
 
-<div class="recipes col-10 offset-1">
+<div class="recipes container">
     <!--    Page Title-->
     <h2 class="title" th:text="${#strings.capitalizeWords(title)}"></h2>
 
     <!--    Recipe Cards-->
     <div class="row">
-        <div class="col col-md-3" th:each="recipe : ${recipes}">
+        <div class="col-md-3 recipe-col" th:each="recipe : ${recipes}">
             <div class="card recipe-card">
                 <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/pasta.jpg" class="card-img-top" alt="Recipe Image">
 <!--                <img src="..." class="card-img-top" alt="Recipe Image">  &lt;!&ndash; Use this line to avoid loading placeholder pics every time" &ndash;&gt;-->
