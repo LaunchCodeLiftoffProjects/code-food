@@ -16,7 +16,7 @@
 
     <!--    Recipe Cards-->
     <div class="row">
-        <div class="col-md-3 recipe-col" th:each="recipe : ${recipes}">
+        <div class="col-md-4 recipe-col" th:each="recipe : ${recipes}">
             <div class="card recipe-card">
                 <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/pasta.jpg" class="card-img-top" alt="Recipe Image">
 <!--                <img src="..." class="card-img-top" alt="Recipe Image">  &lt;!&ndash; Use this line to avoid loading placeholder pics every time" &ndash;&gt;-->
@@ -26,12 +26,18 @@
                     </div>
                     <h3 class="card-title" th:text="${recipe.name}"></h3>
                     <div class="row" th:if="${recipe.dietaryRestrictions.size()>0}">
-                        <div class="col title"><h5>Dietary Restrictions</h5></div>
-                        <div class="col content">
-                            <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
-                                <li><a class="no-underline" th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a></li>
-                            </ul>
+                        <div class="content">
+                            <h5>Dietary Restrictions<span class="float-end badge rounded-pill bg-danger"
+                                                               th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
+                            <a class="no-underline" th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}"
+                               th:text="${dietaryRestriction.name}"></a></span></h5>
                         </div>
+<!--                        <div class="col title"><h5>Dietary Restrictions</h5></div>-->
+<!--                        <div class="col content">-->
+<!--                            <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">-->
+<!--                                <li><a class="no-underline" th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
                     </div>
                     <div class="row" th:if="${recipe.mealTypes.size()>0}">
                         <div class="col title"><h5>Meal Types</h5></div>

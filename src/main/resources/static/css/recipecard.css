@@ -1,6 +1,7 @@
 .recipes .recipe-col {
     flex: 1 0 auto;
     min-width: 360px;
+    max-width: 450px;
     margin-bottom: 5%;
 }
 
