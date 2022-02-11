@@ -47,14 +47,6 @@
                                th:text="${mealType.name}"></a></span></h5>
                         </div>
                     </div>
-<!--                    <div class="row" th:if="${recipe.mealTypes.size()>0}">-->
-<!--                        <div class="col title"><h5>Meal Types</h5></div>-->
-<!--                        <div class="col content">-->
-<!--                            <ul th:each="mealType : ${recipe.mealTypes}">-->
-<!--                                <li><a class="no-underline" th:href="@{'/mealtypes/view/' + ${mealType.id}}" th:text="${mealType.name}"></a></li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
                     <div class="text-center my-4">
                         <a th:href="@{'/view/' + ${recipe.id}}" class="btn btn-warning">View Recipe</a>
 
