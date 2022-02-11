@@ -11,17 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
 public class ApplicationUserService implements UserDetailsService {
 
-    UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUserName(userName);
-
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
-
-        return user.map(ApplicationUser::new).get();
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
+        return new ApplicationUser(user);
     }
 }

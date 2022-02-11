@@ -10,47 +10,27 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class ApplicationUser implements UserDetails {
 
-    private String userName;
-    private String password;
-    private boolean active;
-    private List<GrantedAuthority> authorities;
-//    private final boolean isAccountNonExpired;
-//    private final boolean isAccountNonLocked;
-//    private final boolean isCredentialsNonExpired;
-//    private final boolean isEnabled;
+    private User user;
 
     public ApplicationUser(User user) {
-        this.userName = user.getUserName();
-        this.password = user.getPassword();
-        this.active = user.isActive();
-        this.authorities = Arrays.stream(user.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-//        this.isAccountNonExpired = isAccountNonExpired;
-//        this.isAccountNonLocked = isAccountNonLocked;
-//        this.isCredentialsNonExpired = isCredentialsNonExpired;
-//        this.isEnabled = isEnabled;
-    }
-
-    public ApplicationUser() {
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
+        return null;
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userName;
+        return user.getEmail();
     }
 
     @Override
@@ -70,6 +50,10 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return true;
+    }
+
+    public String getFullName() {
+        return user.getFirstName() + " " + user.getLastName();
     }
 }

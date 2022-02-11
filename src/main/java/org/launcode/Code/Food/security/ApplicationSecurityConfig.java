@@ -10,9 +10,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import javax.sql.DataSource;
 import java.util.concurrent.TimeUnit;
 
 import static org.launcode.Code.Food.security.ApplicationUserRole.*;
@@ -23,13 +26,30 @@ import static org.launcode.Code.Food.security.ApplicationUserRole.*;
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    ApplicationUserService applicationUserService;
+    private DataSource dataSource;
 
-//    @Autowired
-//    public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, ApplicationUserService applicationUserService) {
-//        this.passwordEncoder = passwordEncoder;
-//        this.applicationUserService = applicationUserService;
-//    }
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new ApplicationUserService();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -38,23 +58,23 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*", "/assets.img/*",
-                        "/cuisine", "/cuisine/view/*", "/dietaryrestrictions", "/dietaryrestrictions/view/*",
-                        "/mealtypes", "/mealtypes/view/*", "/recipe", "/recipe/view/*",
-                        "/user/*",
-                        "/list", "/list/*").permitAll() //Allows for pages containing these to be accessed without logging in
-                .antMatchers("/api/**").hasRole(USER.name()) //Allows regular users to access their account
+//                .antMatchers("/", "index", "/css/*", "/js/*", "/assets.img/*",
+//                        "/cuisine", "/cuisine/view/*", "/dietaryrestrictions", "/dietaryrestrictions/view/*",
+//                        "/mealtypes", "/mealtypes/view/*", "/recipe", "/recipe/view/*",
+//                        "/user/*",
+//                        "/list", "/list/*").permitAll() //Allows for pages containing these to be accessed without logging in
+//                .antMatchers("/api/**").hasRole(USER.name()) //Allows regular users to access their account
 //                .antMatchers("/add/**").hasRole(ADMIN.name()) //Allows only admin access to adding
-                .antMatchers("/delete/**").hasRole(ADMIN.name()) //Allows only admin access to deleting
+//                .antMatchers("/delete/**").hasRole(ADMIN.name()) //Allows only admin access to deleting
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and()
                 .formLogin()
                     .loginPage("/login")
                     .permitAll()
-                    .defaultSuccessUrl("/", true) //Adds page to redirect to after successful login
+                    .usernameParameter("email") //Allows us to change parameter for username
                     .passwordParameter("password") //Allows us to change parameter for password
-                    .usernameParameter("username") //Allows us to change parameter for username
+                    .defaultSuccessUrl("/", true) //Adds page to redirect to after successful login
                 .and()
                 .rememberMe()
                     .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) //Increases remember-me session past 2 weeks
@@ -69,48 +89,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/login"); //Adds logout of the user and deletes any data leftover
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(applicationUserService);
-    }
-
-//    @Bean
-//    public DaoAuthenticationProvider daoAuthenticationProvider() {
-//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-//        provider.setPasswordEncoder(passwordEncoder);
-//        provider.setUserDetailsService(applicationUserService);
-//        return provider;
-//    }
-
-//    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        UserDetails annaSmithUser = User.builder()
-//                .username("annasmith")
-//                .password(passwordEncoder.encode("password"))
-//                .authorities(USER.getGrantedAuthorities())
-//                .build();
-//        //Manually adds Anna Smith as a USER
-//
-//        UserDetails lindaUser = User.builder()
-//                .username("linda")
-//                .password(passwordEncoder.encode("password123"))
-//                .authorities(ADMIN.getGrantedAuthorities())
-//                .build();
-//        //Manually adds Linda as an ADMIN
-//
-//        UserDetails tomUser = User.builder()
-//                .username("tom")
-//                .password(passwordEncoder.encode("password123"))
-//                .authorities(ADMINTRAINEE.getGrantedAuthorities())
-//                .build();
-//        //Manually adds Tom as an ADMIN TRAINEE
-//
-//        return new InMemoryUserDetailsManager(
-//                annaSmithUser,
-//                lindaUser,
-//                tomUser
-//        );
-//    }
+/*
+    In SQL, use:
+    INSERT INTO users_roles (user_id, role_id) VALUES (x, y);
+    to add roles
+ */
 
 }

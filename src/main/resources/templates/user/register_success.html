@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h3>You have signed up successfully!</h3>
+    <h4><a th:ref="@{/login}">Click here to login</a></h4>
+</div>
+
+</body>
+</html>

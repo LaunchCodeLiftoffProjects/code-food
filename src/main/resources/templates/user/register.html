@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="/login" class="navbar-brand">User Login</a>
+        </div>
+    </div>
+</head>
+<body class="container  body-content">
+
+<h1>User Sign Up</h1>
+
+<div th:replace="fragments :: page-header"></div>
+
+
+<div>
+    <form th:action="@{/user/register_success}" method="post"
+    th:object="${user}">
+        <div>
+            <div class="form-group">
+                <label th:for="email">Email</label>
+                <input type="email" th:field="*{email}" required />
+            </div>
+            <div class="form-group">
+                <label th:for="password">Password</label>
+                <input type="password" th:field="*{password}" required
+                       minlength="4" maxlength="20" />
+            </div>
+            <div class="form-group">
+                <label th:for="firstName">First Name</label>
+                <input type="text" th:field="*{firstName}" required
+                       minlength="2" maxlength="20" />
+            </div>
+            <div class="form-group">
+                <label th:for="lastName">Last Name</label>
+                <input type="text" th:field="*{lastName}" required
+                       minlength="2" maxlength="20" />
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </form>
+</div>
+<!--<form method="post" style="max-width:600px;">-->
+<!--    <div class="form-group">-->
+<!--        <label th:for="email">Email</label>-->
+<!--        <input class="form-control" type="text" />-->
+<!--    </div>-->
+
+
+<!--    <input type="submit" value="Sign Up" />-->
+<!--</form>-->
+</body>
+</html>
