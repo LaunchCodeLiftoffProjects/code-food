@@ -28,15 +28,8 @@
 
 .recipes a.no-underline {
     text-decoration: none !important;
-}
-
-.recipes .bg-success {
+    color: #f0f0f0;
     font-size: 1rem;
-    background-color: #f7810a !important;
-}
-
-.recipes .bg-success a {
-    color: #f0f0f0 !important;
 }
 
 .recipes .row .content ul {

@@ -22,31 +22,33 @@
 <!--                <img src="..." class="card-img-top" alt="Recipe Image">  &lt;!&ndash; Use this line to avoid loading placeholder pics every time" &ndash;&gt;-->
                 <div class="card-body">
                     <div class="clearfix mb-3">
-                        <span class="float-start badge rounded-pill bg-success"><a class="no-underline" th:href="@{'/cuisine/view/' + ${recipe.cuisine?.id}}" th:text="${recipe.cuisine?.name}"></a></span>
+                        <span class="float-start badge rounded-pill btn-secondary"><a class="no-underline" th:href="@{'/cuisine/view/' + ${recipe.cuisine?.id}}" th:text="${recipe.cuisine?.name}"></a></span>
                     </div>
-                    <h3 class="card-title" th:text="${recipe.name}"></h3>
+                    <h2 class="card-title" th:text="${recipe.name}"></h2>
                     <div class="row" th:if="${recipe.dietaryRestrictions.size()>0}">
                         <div class="content">
-                            <h5>Dietary Restrictions<span class="float-end badge rounded-pill bg-danger"
+                            <h5>Dietary Restrictions<span class="float-end badge rounded-pill btn-danger"
                                                                th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">
                             <a class="no-underline" th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}"
                                th:text="${dietaryRestriction.name}"></a></span></h5>
                         </div>
-<!--                        <div class="col title"><h5>Dietary Restrictions</h5></div>-->
-<!--                        <div class="col content">-->
-<!--                            <ul th:each="dietaryRestriction : ${recipe.dietaryRestrictions}">-->
-<!--                                <li><a class="no-underline" th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a></li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
                     </div>
                     <div class="row" th:if="${recipe.mealTypes.size()>0}">
-                        <div class="col title"><h5>Meal Types</h5></div>
-                        <div class="col content">
-                            <ul th:each="mealType : ${recipe.mealTypes}">
-                                <li><a class="no-underline" th:href="@{'/mealtypes/view/' + ${mealType.id}}" th:text="${mealType.name}"></a></li>
-                            </ul>
+                        <div class="content">
+                            <h5>Meal Type<span class="float-end badge rounded-pill btn-info"
+                                                          th:each="mealType : ${recipe.mealTypes}">
+                            <a class="no-underline" th:href="@{'/mealtypes/view/' + ${mealType.id}}"
+                               th:text="${mealType.name}"></a></span></h5>
                         </div>
                     </div>
+<!--                    <div class="row" th:if="${recipe.mealTypes.size()>0}">-->
+<!--                        <div class="col title"><h5>Meal Types</h5></div>-->
+<!--                        <div class="col content">-->
+<!--                            <ul th:each="mealType : ${recipe.mealTypes}">-->
+<!--                                <li><a class="no-underline" th:href="@{'/mealtypes/view/' + ${mealType.id}}" th:text="${mealType.name}"></a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <div class="text-center my-4">
                         <a th:href="@{'/view/' + ${recipe.id}}" class="btn btn-warning">View Recipe</a>
 
