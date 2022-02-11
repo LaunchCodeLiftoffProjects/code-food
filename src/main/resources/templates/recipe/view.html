@@ -19,9 +19,15 @@
     <p th:unless="${recipe.mealTypes.size()>0}" >Not Available</p>
 </div>
 
-
-<div class="navbar-brand">
-    <a  th:href="@{'/recipe'}">Go Back</a>
+<div class="container recipe-buttons">
+    <div class="d-flex h-100">
+        <span class="align-self-start ml-auto" style="margin-right:10px;">
+            <a th:href="@{'/recipe'}" class="btn btn-warning ">Go Back</a>
+        </span>
+        <span>
+            <a th:href="@{'/recipe/updateDetails?recipeId=' + ${recipe.id}}" class="btn btn-danger ">Update Recipe</a>
+        </span>
+    </div>
 </div>
 
 </body>
