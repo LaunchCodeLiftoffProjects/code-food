@@ -40,7 +40,6 @@ public class RecipeController {
     }
 
     @GetMapping("add")
-    @PreAuthorize("hasAuthority('recipe:write')")
     public String displayAddRecipeForm(Model model) {
         model.addAttribute(new Recipe());
         model.addAttribute("cuisines", cuisineRepository.findAll());
@@ -50,7 +49,6 @@ public class RecipeController {
     }
 
     @PostMapping("add")
-    @PreAuthorize("hasAuthority('recipe:write')")
     public String processAddRecipeForm(@ModelAttribute @Valid Recipe newRecipe, Errors errors, Model model,
                                        @RequestParam int cuisineId,
                                        @RequestParam List<Integer> dietaryRestrictions,
@@ -106,7 +104,6 @@ public class RecipeController {
 
 
     @GetMapping("delete")
-    @PreAuthorize("hasAuthority('recipe:write')")
     public String displayDeleteRecipeForm(Model model){
         model.addAttribute("title","Delete Recipe");
         model.addAttribute("recipes", recipeRepository.findAll());
@@ -114,7 +111,6 @@ public class RecipeController {
     }
 
     @PostMapping("delete")
-    @PreAuthorize("hasAuthority('recipe:write')")
     public String deleteRecipeListings(@RequestParam(required = false) int[] recipeIds){
         if(recipeIds!=null) {
             for (int id : recipeIds) {

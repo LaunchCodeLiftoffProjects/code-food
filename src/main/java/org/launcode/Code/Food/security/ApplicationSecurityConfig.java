@@ -64,8 +64,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        "/user/*",
 //                        "/list", "/list/*").permitAll() //Allows for pages containing these to be accessed without logging in
 //                .antMatchers("/api/**").hasRole(USER.name()) //Allows regular users to access their account
-//                .antMatchers("/add/**").hasRole(ADMIN.name()) //Allows only admin access to adding
-//                .antMatchers("/delete/**").hasRole(ADMIN.name()) //Allows only admin access to deleting
+                .antMatchers("/add/**").hasAuthority("ADMIN") //Allows only admin access to adding
+                .antMatchers("/delete/**").hasAuthority("ADMIN") //Allows only admin access to deleting
                 .anyRequest()
                 .permitAll()
                 .and()
@@ -86,7 +86,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID", "remember-me")
-                    .logoutSuccessUrl("/login"); //Adds logout of the user and deletes any data leftover
+                    .logoutSuccessUrl("/login") //Adds logout of the user and deletes any data leftover
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
     }
 
 /*

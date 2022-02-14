@@ -1,20 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments :: head">
-<!--    <form th:action="@{/logout}" method="post">-->
-<!--        <input type="submit" value="Logout" />-->
-<!--    </form>-->
-</head>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
 <body>
 
     <div th:replace="fragments :: page-header"></div>
 
-<!--    <div sec:authorization="isAuthenticated()" class="container body-content">-->
-<!--        <h3><a href="logout">Logout</a></h3>-->
-<!--    </div>-->
-
     <div class="container body-content">
-        <h3><a href="logout">Logout</a></h3>
         <h1>List of All Users</h1>
     </div>
     <div>
