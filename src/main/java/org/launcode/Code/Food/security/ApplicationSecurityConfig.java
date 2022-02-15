@@ -18,8 +18,6 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import javax.sql.DataSource;
 import java.util.concurrent.TimeUnit;
 
-import static org.launcode.Code.Food.security.ApplicationUserRole.*;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

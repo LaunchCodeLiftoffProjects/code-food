@@ -25,7 +25,7 @@ public class User {
     @Column(nullable = false, length = 20)
     private String lastName;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(

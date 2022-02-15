@@ -27,12 +27,14 @@ public class MealTypeController {
     }
 
     @GetMapping("add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayAddMealTypeForm(Model model) {
         model.addAttribute(new MealType());
         return "mealtypes/add";
     }
 
     @PostMapping("add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String processAddMealTypeForm(@ModelAttribute @Valid MealType newMealType, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title","Meal Types");
@@ -58,6 +60,7 @@ public class MealTypeController {
     }
 
     @GetMapping("delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayDeleteMealTypeForm(Model model){
         model.addAttribute("title","Delete Meal Type");
         model.addAttribute("mealTypes", mealTypeRepository.findAll());
@@ -65,6 +68,7 @@ public class MealTypeController {
     }
 
     @PostMapping("delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteMealTypeListings(@RequestParam(required = false) int[] mealTypeIds){
         if(mealTypeIds!=null) {
             for (int id : mealTypeIds) {

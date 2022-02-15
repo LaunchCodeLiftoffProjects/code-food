@@ -26,14 +26,14 @@ public class CuisineController {
     }
 
     @GetMapping("add")
-//    @PreAuthorize("hasAuthority('recipe:write')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayAddCuisineForm(Model model) {
         model.addAttribute(new Cuisine());
         return "cuisine/add";
     }
 
     @PostMapping("add")
-//    @PreAuthorize("hasAuthority('recipe:write')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String processAddCuisineForm(@ModelAttribute @Valid Cuisine newCuisine,
                                         Errors errors, Model model) {
 
@@ -58,7 +58,7 @@ public class CuisineController {
     }
 
     @GetMapping("delete")
-//    @PreAuthorize("hasAuthority('recipe:write')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayDeleteCuisineForm(Model model){
         model.addAttribute("title","Delete Cuisine");
         model.addAttribute("cuisines",cuisineRepository.findAll());
@@ -66,7 +66,7 @@ public class CuisineController {
     }
 
     @PostMapping("delete")
-//    @PreAuthorize("hasAuthority('recipe:write')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteCuisineListings(@RequestParam(required = false) int[] cuisineIds){
         if(cuisineIds!=null) {
             for (int id : cuisineIds) {

@@ -43,6 +43,12 @@ public class HomeController {
         return "index";
     }
 
+    //Remaps to 403.html when denied access
+    @GetMapping("/403")
+    public String error403() {
+        return "403";
+    }
+
 /*
 
     @GetMapping("add")
@@ -107,11 +113,6 @@ public class HomeController {
         return "view";
     }
 */
-
-    @GetMapping("/403")
-    public String error403() {
-        return "403";
-    }
 
 }
 

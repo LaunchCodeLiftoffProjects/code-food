@@ -27,12 +27,14 @@ public class DietaryRestrictionController {
     }
 
     @GetMapping("add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayAddDietaryRestrictionForm(Model model) {
         model.addAttribute(new DietaryRestriction());
         return "dietaryrestrictions/add";
     }
 
     @PostMapping("add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String processAddDietaryRestrictionForm(@ModelAttribute @Valid DietaryRestriction newDietaryRestriction, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title","Dietary Restrictions");
@@ -58,6 +60,7 @@ public class DietaryRestrictionController {
     }
 
     @GetMapping("delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayDeleteDietaryRestrictionForm(Model model){
         model.addAttribute("title","Delete Dietary Restriction");
         model.addAttribute("dietaryRestrictions", dietaryRestrictionRepository.findAll());
@@ -65,6 +68,7 @@ public class DietaryRestrictionController {
     }
 
     @PostMapping("delete")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteDietaryRestrictionListings(@RequestParam(required = false) int[] dietaryRestrictionIds){
         if(dietaryRestrictionIds!=null) {
             for (int id : dietaryRestrictionIds) {
