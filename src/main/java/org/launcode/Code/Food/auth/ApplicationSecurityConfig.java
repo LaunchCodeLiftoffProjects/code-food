@@ -1,4 +1,4 @@
-package org.launcode.Code.Food.security;
+package org.launcode.Code.Food.auth;
 
 import org.launcode.Code.Food.auth.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
