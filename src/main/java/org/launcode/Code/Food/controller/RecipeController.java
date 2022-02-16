@@ -125,7 +125,7 @@ public class RecipeController {
     }
 
     @GetMapping("update")
-    @PreAuthorize("hasAuthority('recipe:write')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayUpdateForm(Model model){
         model.addAttribute("title","UpdateRecipes");
         model.addAttribute("recipes",recipeRepository.findAll());
@@ -133,7 +133,7 @@ public class RecipeController {
     }
 
     @GetMapping("updateDetails")
-    @PreAuthorize("hasAuthority('recipe:write')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String displayUpdateDetailsForm(Model model,int recipeId){
         Optional<Recipe> oppRecipeEdit=recipeRepository.findById(recipeId);
         Recipe recipeToEdit=(Recipe) oppRecipeEdit.get();
@@ -145,7 +145,7 @@ public class RecipeController {
     }
 
     @PostMapping("updateDetails")
-    @PreAuthorize("hasAuthority('recipe:write')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String processUpdateDetailsForm(@ModelAttribute @Valid Recipe recipeToEdit,Errors errors,Model model,@RequestParam Integer recipeId,@RequestParam(required = false) String name,@RequestParam String ingredients,@RequestParam String instructions,
                                                   @RequestParam Integer cuisine,@RequestParam List<Integer> dietaryRestrictions,@RequestParam List<Integer> mealTypes) {
         if (errors.hasErrors()) {
