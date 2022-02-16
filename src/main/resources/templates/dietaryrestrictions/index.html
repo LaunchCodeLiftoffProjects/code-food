@@ -15,7 +15,10 @@
             <a th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a>
         </li>
     </ul>
-    <a th:href="@{'/dietaryrestrictions/add'}">Add Dietary Restrictions</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item"><a class="nav-link" th:href="@{'/dietaryrestrictions/add'}">Add Dietary Restrictions</a></li>
+        <li><a th:href="@{'/dietaryrestrictions/delete'}">Delete Dietary Restrictions</a></li>
+    </ul>
 
 </div>
 

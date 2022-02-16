@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+
+<body class="container body-content">
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<h1>Update Recipe</h1>
+<form method="get" action="/recipe/updateDetails">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Cuisine</th>
+            <th>Dietary Restriction</th>
+            <th>Meal Type</th>
+        </tr>
+        </thead>
+        <tr th:each="recipe:${recipes}">
+            <td th:text="${recipe.id}"></td>
+            <td th:text="${recipe.name}"></td>
+            <td th:if="${recipe.cuisine !=null}"   th:text="${recipe.cuisine.name}"></td>
+            <td th:unless="${recipe.cuisine !=null}" >N/A</td>
+            <td th:if="${recipe.dietaryRestrictions.size()>0}"th:text="${recipe.dietaryRestrictions}"></td>
+            <td th:unless="${recipe.dietaryRestrictions.size()>0}" >N/A</td>
+            <td th:if="${recipe.mealTypes.size()>0}" th:text="${recipe.mealTypes}"></td>
+            <td th:unless="${recipe.mealTypes.size()>0}" >N/A</td>
+
+            <!--<td th:each="mealType:${recipe.mealTypes}">
+                <p th:text="${mealType.name}"></p>
+            </td>-->
+            <td>
+                <a th:id="${recipe.id}" value="update" class="btn btn-success" th:href="@{/recipe/updateDetails?recipeId={recipeId}(recipeId=${recipe.id})}">Update</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -8,10 +8,27 @@
 <nav th:replace="fragments :: page-header"></nav>
 
 <div class="job-listing">
-    <p th:text="${'Name: ' + recipe.name}"></p>
-
+    <p class="thicker">Name:</p> <p th:text="${recipe.name}"></p>
+    <p class="thicker" >Ingredients: </p>  <p th:text="${recipe.ingredients}"></p>
+    <p class="thicker" >Instructions:</p>  <p th:text="${recipe.instructions}"></p>
+    <p class="thicker" >Cuisine:</p> <p th:if="${recipe.cuisine !=null}" th:text="${recipe.cuisine.name}"></p>
+    <p th:unless="${recipe.cuisine !=null}" >Not Available</p>
+    <p class="thicker" >Dietary Restrictions:</p> <p th:if="${recipe.dietaryRestrictions.size()>0}" th:text="${recipe.dietaryRestrictions}"></p>
+    <p th:unless="${recipe.dietaryRestrictions.size()>0}">Not Available</p>
+    <p class="thicker" >Meal Type:</p> <p th:if="${recipe.mealTypes.size()>0}" th:text="${recipe.mealTypes}"></p>
+    <p th:unless="${recipe.mealTypes.size()>0}" >Not Available</p>
 </div>
 
+<div class="container recipe-buttons">
+    <div class="d-flex h-100">
+        <span class="align-self-start ml-auto" style="margin-right:10px;">
+            <a th:href="@{'/recipe'}" class="btn btn-warning ">Go Back</a>
+        </span>
+        <span>
+            <a th:href="@{'/recipe/updateDetails?recipeId=' + ${recipe.id}}" class="btn btn-danger ">Update Recipe</a>
+        </span>
+    </div>
+</div>
 
 </body>
 </html>

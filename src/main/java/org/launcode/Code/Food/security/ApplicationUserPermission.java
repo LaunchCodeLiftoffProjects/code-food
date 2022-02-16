@@ -4,7 +4,10 @@ public enum ApplicationUserPermission {
     USER_READ("user:read"),
     USER_WRITE("user:write"),
     COURSE_READ("course:read"),
-    COURSE_WRITE("course:write");
+    COURSE_WRITE("course:write"),
+    RECIPE_READ("recipe:read"),
+    RECIPE_WRITE("recipe:write");
+
 
     private final String permission;
 

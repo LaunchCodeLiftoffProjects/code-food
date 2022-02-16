@@ -45,15 +45,20 @@ public class RecipeData {
     }
 
     public static String getFieldValue(Recipe recipe, String fieldName){
-        String theValue;
+        String theValue = "";
         if (fieldName.equals("name")){
             theValue = recipe.getName();
-        } else if (fieldName.equals("cuisine")){
-            theValue = recipe.getCuisine().toString();
-        // this will need updating, now that we have more than 3 search fields.
-        // But will it need updating now, if we're not doing a search feature in v1?
-        } else {
+        }
+        if (fieldName.equals("cuisine")) {
+            if(recipe.getCuisine() !=null) {
+                theValue = recipe.getCuisine().toString();
+            }
+        }
+        if (fieldName.equals("dietaryRestriction")){
             theValue = recipe.getDietaryRestrictions().toString();
+        }
+        if (fieldName.equals("mealType")){
+            theValue = recipe.getMealTypes().toString();
         }
         return theValue;
     }
@@ -74,9 +79,11 @@ public class RecipeData {
 
             if (recipe.getName().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
-            } else if (recipe.getCuisine().toString().toLowerCase().contains(lower_val)) {
+            } else if (recipe.getCuisine()!=null &&recipe.getCuisine().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
             } else if (recipe.getDietaryRestrictions().toString().toLowerCase().contains(lower_val)) {
+                results.add(recipe);
+            } else if (recipe.getMealTypes().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
             } else if (recipe.toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
@@ -86,4 +93,3 @@ public class RecipeData {
     }
 
 }
-

@@ -3,6 +3,7 @@ package org.launcode.Code.Food.controller;
 import org.launcode.Code.Food.models.DietaryRestriction;
 import org.launcode.Code.Food.models.data.DietaryRestrictionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -26,13 +27,15 @@ public class DietaryRestrictionController {
     }
 
     @GetMapping("add")
-    public String displayAddDietaryForm(Model model) {
+    @PreAuthorize("hasAuthority('recipe:write')")
+    public String displayAddDietaryRestrictionForm(Model model) {
         model.addAttribute(new DietaryRestriction());
         return "dietaryrestrictions/add";
     }
 
     @PostMapping("add")
-    public String processAddDietaryForm(@ModelAttribute @Valid DietaryRestriction newDietaryRestriction, Errors errors, Model model) {
+    @PreAuthorize("hasAuthority('recipe:write')")
+    public String processAddDietaryRestrictionForm(@ModelAttribute @Valid DietaryRestriction newDietaryRestriction, Errors errors, Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title","Dietary Restrictions");
             model.addAttribute(newDietaryRestriction);
@@ -57,6 +60,7 @@ public class DietaryRestrictionController {
     }
 
     @GetMapping("delete")
+    @PreAuthorize("hasAuthority('recipe:write')")
     public String displayDeleteDietaryRestrictionForm(Model model){
         model.addAttribute("title","Delete Dietary Restriction");
         model.addAttribute("dietaryRestrictions", dietaryRestrictionRepository.findAll());
@@ -64,6 +68,7 @@ public class DietaryRestrictionController {
     }
 
     @PostMapping("delete")
+    @PreAuthorize("hasAuthority('recipe:write')")
     public String deleteDietaryRestrictionListings(@RequestParam(required = false) int[] dietaryRestrictionIds){
         if(dietaryRestrictionIds!=null) {
             for (int id : dietaryRestrictionIds) {

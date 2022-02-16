@@ -37,8 +37,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*").permitAll() //Allows for pages containing these to be accessed without logging in
+                .antMatchers("/", "index", "/css/*", "/js/*", "/assets.img/*",
+                        "/cuisine", "/cuisine/view/*", "/dietaryrestrictions", "/dietaryrestrictions/view/*",
+                        "/mealtypes", "/mealtypes/view/*", "/recipe", "/recipe/view/*",
+                        "/list", "/list/*","/search","/search/*").permitAll() //Allows for pages containing these to be accessed without logging in
                 .antMatchers("/api/**").hasRole(USER.name()) //Allows regular users to access their account
+                .antMatchers("/add/**").hasRole(ADMIN.name()) //Allows only admin access to adding
+                .antMatchers("/delete/**").hasRole(ADMIN.name()) //Allows only admin access to deleting
                 .anyRequest()
                 .authenticated()
                 .and()

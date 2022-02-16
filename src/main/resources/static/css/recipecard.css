@@ -1,0 +1,43 @@
+.recipes .recipe-col {
+    width: 360px;
+    margin-bottom: 5%;
+}
+
+.recipes .recipe-card {
+    background: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .25), 0 0 5px rgba(0, 0, 0, .25);
+    border: 2px solid black !important;
+    border-radius: 0 0 15px 15px;
+}
+
+.recipes .card-img-top {
+    width: 100%;
+    object-fit: contain;
+    padding: 0;
+    border-radius: 0;
+}
+
+.recipes .content {
+    display: flex;
+}
+
+.description h5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.recipes .content .pills {
+    justify-content: center;
+}
+
+.recipes .content .pills .badge {
+    margin-right: 5px;
+    font-weight: 400;
+}
+
+.recipes a.no-underline {
+    text-decoration: none !important;
+    color: #f0f0f0;
+    font-size: 1rem;
+}
