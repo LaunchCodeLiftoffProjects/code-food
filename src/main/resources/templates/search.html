@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container  body-content">
+<div th:replace="fragments :: page-header"></div>
+
+<h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
+<div >
+    <form th:action="@{/search/results}" method = "post">
+        <h1>Search by:</h1>
+
+        <p>
+            <span th:each="column : ${columns}">
+                <input
+                        type="radio"
+                        name="searchType"
+                        th:id="${column.key}"
+                        th:value="${column.key}"
+                        th:checked="${column.key == 'all'}"/>
+                <label th:for="${column.key}" th:text="${column.value}"></label>
+            </span>
+
+        </p>
+
+        <p>
+            <label for="searchTerm">Keyword:</label>
+            <input type="text" name="searchTerm" id="searchTerm" />
+        </p>
+
+        <input type="submit" value="Search" />
+    </form>
+
+    <hr />
+
+    <table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Cuisine</th>
+        <th>DietaryRestriction</th>
+        <th>MealType</th>
+    </tr>
+    </thead>
+    <tr th:each="recipe:${recipes}">
+    <td th:text="${recipe.id}"></td>
+    <td><a th:href="@{'/recipe/view/'+${recipe.id}}"th:text="${recipe.name}"></a></td>
+    <td th:if="${recipe.cuisine!=null}"th:text="${recipe.cuisine.name}"></td>
+    <td th:unless="${recipe.cuisine!=null}">N/A</td>
+    <td th:if="${recipe.dietaryRestrictions.size()>0}"th:text="${recipe.dietaryRestrictions}"></td>
+    <td th:unless="${recipe.dietaryRestrictions.size()>0}">N/A</td>
+    <td th:if="${recipe.mealTypes.size()>0}"th:text="${recipe.mealTypes}"></td>
+    <td th:unless="${recipe.mealTypes.size()>0}">N/A</td>
+
+    </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
+
