@@ -5,6 +5,7 @@ import org.launcode.Code.Food.models.DietaryRestriction;
 import org.launcode.Code.Food.models.Recipe;
 import org.launcode.Code.Food.models.data.CuisineRepository;
 import org.launcode.Code.Food.models.data.DietaryRestrictionRepository;
+import org.launcode.Code.Food.models.data.MealTypeRepository;
 import org.launcode.Code.Food.models.data.RecipeRepository;
 import org.launcode.Code.Food.models.dto.RecipeDietaryRestrictionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ import java.util.Optional;
 @Controller
 public class HomeController {
 
-
     @Autowired
     private RecipeRepository recipeRepository;
 
@@ -32,6 +32,9 @@ public class HomeController {
     @Autowired
     private DietaryRestrictionRepository dietaryRestrictionRepository;
 
+    @Autowired
+    private MealTypeRepository mealTypeRepository;
+
     @RequestMapping("")
     public String index(Model model) {
 
@@ -40,7 +43,13 @@ public class HomeController {
         return "index";
     }
 
+    //Remaps to 403.html when denied access
+    @GetMapping("/403")
+    public String error403() {
+        return "403";
+    }
 
+    /*
     @GetMapping("add")
     public String displayAddRecipeForm(Model model) {
         model.addAttribute("title", "Add Recipe");
@@ -102,6 +111,7 @@ public class HomeController {
         }
         return "view";
     }
+     */
 
 }
 

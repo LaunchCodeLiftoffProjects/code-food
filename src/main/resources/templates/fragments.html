@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:fragment="head">
 
@@ -17,13 +18,13 @@
 <header th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a th:href="@{/}" class="navbar-brand">Code:Food</a>
+            <a th:href="@{/}" class="navbar-brand">Code: Food</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/list}">View All Recipes</a></li>
 <!--                <li><a th:href="@{/search}">Search</a></li> -->
-                <li><a th:href="@{/recipe/add}">Add Recipe</a></li>
+                <li sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/recipe/add}">Add Recipe</a></li>
                 <li><a th:href="@{/recipe}">Recipe</a></li>
                 <li><a th:href="@{/cuisine}">Cuisine</a></li>
                 <li><a th:href="@{/dietaryrestrictions}">Dietary Restriction</a></li>

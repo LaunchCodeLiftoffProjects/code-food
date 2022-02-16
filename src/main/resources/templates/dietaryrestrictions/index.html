@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head th:replace="fragments :: head">
 </head>
 <body>
@@ -15,7 +16,7 @@
             <a th:href="@{'/dietaryrestrictions/view/' + ${dietaryRestriction.id}}" th:text="${dietaryRestriction.name}"></a>
         </li>
     </ul>
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" sec:authorize="hasAnyAuthority('ADMIN')">
         <li class="nav-item"><a class="nav-link" th:href="@{'/dietaryrestrictions/add'}">Add Dietary Restrictions</a></li>
         <li><a th:href="@{'/dietaryrestrictions/delete'}">Delete Dietary Restrictions</a></li>
     </ul>
