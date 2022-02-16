@@ -50,7 +50,9 @@ public class RecipeData {
             theValue = recipe.getName();
         }
         if (fieldName.equals("cuisine")) {
-            theValue = recipe.getCuisine().toString();
+            if(recipe.getCuisine() !=null) {
+                theValue = recipe.getCuisine().toString();
+            }
         }
         if (fieldName.equals("dietaryRestriction")){
             theValue = recipe.getDietaryRestrictions().toString();
@@ -77,7 +79,7 @@ public class RecipeData {
 
             if (recipe.getName().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
-            } else if (recipe.getCuisine().toString().toLowerCase().contains(lower_val)) {
+            } else if (recipe.getCuisine()!=null &&recipe.getCuisine().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
             } else if (recipe.getDietaryRestrictions().toString().toLowerCase().contains(lower_val)) {
                 results.add(recipe);
