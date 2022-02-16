@@ -5,6 +5,7 @@ import org.launcode.Code.Food.models.Recipe;
 import org.launcode.Code.Food.models.RecipeData;
 import org.launcode.Code.Food.models.data.CuisineRepository;
 import org.launcode.Code.Food.models.data.DietaryRestrictionRepository;
+import org.launcode.Code.Food.models.data.MealTypeRepository;
 import org.launcode.Code.Food.models.data.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,8 @@ public class ListController {
     @Autowired
     private DietaryRestrictionRepository dietaryRestrictionRepository;
 
+    @Autowired
+    private MealTypeRepository mealTypeRepository;
 
     static HashMap<String, String> columnChoices = new HashMap<>();
 
